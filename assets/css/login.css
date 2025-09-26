@@ -1,0 +1,382 @@
+/* Gebert Segurança Patrimonial - Login Styles */
+/* ============================================= */
+
+:root {
+    --gebert-gold: #FFD700;
+    --gebert-dark-gold: #FFA500;
+    --gebert-black: #1a1a1a;
+    --gebert-dark-gray: #2d2d2d;
+    --gebert-light-gold: #FFED4E;
+}
+
+/* Layout Principal */
+body {
+    background: linear-gradient(135deg, var(--gebert-black) 0%, var(--gebert-dark-gray) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container {
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+/* Card Principal */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--gebert-gold);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--gebert-gold) 0%, var(--gebert-dark-gold) 100%);
+    border-radius: 12px 12px 0 0 !important;
+    color: var(--gebert-black);
+    text-align: center;
+    padding: 1.2rem 1rem;
+    border-bottom: 2px solid var(--gebert-dark-gold);
+}
+
+.card-body {
+    padding: 1.5rem 1.2rem;
+    background-color: #fff;
+}
+
+/* Logo e Branding */
+.logo-container {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--gebert-black);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    margin-bottom: 0;
+}
+
+.logo-subtitle {
+    font-size: 0.75rem;
+    color: var(--gebert-black);
+    opacity: 0.8;
+    font-weight: 500;
+    margin-top: -3px;
+}
+
+/* Formulário */
+.form-control {
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    border-color: var(--gebert-gold);
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+}
+
+.form-label {
+    color: var(--gebert-dark-gray);
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.form-check-label {
+    color: var(--gebert-dark-gray);
+    font-size: 14px;
+}
+
+/* Input Groups */
+.input-group-text {
+    border: 2px solid #e9ecef;
+    border-right: none;
+    background-color: #f8f9fa;
+    border-radius: 8px 0 0 8px;
+    color: var(--gebert-dark-gray);
+    padding: 8px 10px;
+}
+
+.input-group .form-control {
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+}
+
+.input-group-text:has(+ .form-control:focus),
+.form-control:focus + .input-group-text {
+    border-color: var(--gebert-gold);
+}
+
+/* Botões */
+.btn-login {
+    background: linear-gradient(135deg, var(--gebert-gold) 0%, var(--gebert-dark-gold) 100%);
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: var(--gebert-black);
+    font-size: 15px;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, var(--gebert-light-gold) 0%, var(--gebert-gold) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    color: var(--gebert-black);
+}
+
+/* Links */
+.forgot-password {
+    color: var(--gebert-dark-gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgot-password:hover {
+    color: var(--gebert-gold);
+    text-decoration: underline;
+}
+
+/* Rodapé */
+.text-footer {
+    color: var(--gebert-gold) !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Alertas */
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+/* ============================================= */
+/* RESPONSIVIDADE */
+/* ============================================= */
+
+/* Tablets e Smartphones */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+    
+    .login-container {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .card {
+        margin: 0;
+        border-radius: 10px;
+    }
+    
+    .card-header {
+        padding: 1.5rem 1rem;
+        border-radius: 10px 10px 0 0 !important;
+    }
+    
+    .card-body {
+        padding: 1.5rem 1rem;
+    }
+    
+    .logo-text {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    h4, h5 {
+        font-size: 1.1rem;
+    }
+    
+    .form-control {
+        padding: 10px 12px;
+        font-size: 16px; /* Evita zoom no iOS */
+    }
+    
+    .btn-login {
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
+
+/* Smartphones Pequenos */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        padding-top: 15px;
+    }
+    
+    .card-header {
+        padding: 1rem 0.75rem;
+    }
+    
+    .card-body {
+        padding: 1rem 0.75rem;
+    }
+    
+    .logo-text {
+        font-size: 1.8rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.7rem;
+    }
+    
+    h4, h5 {
+        font-size: 1rem;
+    }
+    
+    .form-control {
+        padding: 8px 10px;
+        font-size: 16px;
+    }
+    
+    .input-group-text {
+        padding: 8px 10px;
+    }
+    
+    .btn-login {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .forgot-password {
+        font-size: 0.8rem;
+    }
+    
+    .text-footer {
+        font-size: 0.7rem;
+    }
+}
+
+/* Dispositivos Muito Pequenos */
+@media (max-width: 360px) {
+    .logo-text {
+        font-size: 1.6rem;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.65rem;
+    }
+    
+    .card-header {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .card-body {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+/* Modo Paisagem Mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+    
+    .card-header {
+        padding: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.7rem;
+    }
+    
+    h4, h5 {
+        font-size: 0.9rem;
+        margin-top: 0.5rem !important;
+    }
+    
+    .mb-3, .mb-2 {
+        margin-bottom: 0.75rem !important;
+    }
+}
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .login-container {
+        max-width: 450px;
+    }
+    
+    .logo-text {
+        font-size: 2.2rem;
+    }
+}
+
+/* ============================================= */
+/* ACESSIBILIDADE */
+/* ============================================= */
+
+/* Redução de Movimento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Telas de Alta Resolução */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .logo-text {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Modo Escuro (caso o usuário prefira) */
+@media (prefers-color-scheme: dark) {
+    .card-body {
+        background-color: #f8f9fa;
+    }
+}
+
+/* Focus para acessibilidade */
+.form-control:focus,
+.btn:focus,
+.form-check-input:focus {
+    outline: 2px solid var(--gebert-gold);
+    outline-offset: 2px;
+}
+
+/* Hover states para touch devices */
+@media (hover: hover) {
+    .btn-login:hover {
+        cursor: pointer;
+    }
+    
+    .forgot-password:hover {
+        cursor: pointer;
+    }
+}
