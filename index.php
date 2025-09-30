@@ -1,7 +1,8 @@
 <?php
 require_once 'config/conexao.php'; // Incluir o arquivo que contém a função
 
-$con = connect_local_mysqli("gebert");
+session_start(); // Inicia a sessão
+
 ?>
 
 <!DOCTYPE html>
@@ -125,7 +126,7 @@ $con = connect_local_mysqli("gebert");
 
                     <div class="text-center mt-2">
                         <small class="text-footer" style="font-size: 11px;">
-                            © <?php echo date('Y'); ?> Gebert Segurança Patrimonial
+                            © <?php echo date('Y'); ?> GebertsssSegurança Patrimonial
                         </small>
                     </div>
                 </div>
@@ -138,6 +139,102 @@ $con = connect_local_mysqli("gebert");
 
     <!-- Custom JS -->
     <script src="assets/js/login.js"></script>
+
+
+    <script>
+        // Função para mostrar mensagens amigáveis
+        function showMessage(message, type = 'info') {
+            const alertContainer = document.querySelector('.card-body');
+            const existingAlert = alertContainer.querySelector('.alert');
+            
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+            
+            const alertHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show mb-4" role="alert">
+                    <i class="bi ${type === 'success' ? 'bi-check-circle' : 'bi-info-circle'} me-2"></i>
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            
+            alertContainer.insertAdjacentHTML('afterbegin', alertHTML);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const loginButton = document.querySelector('.btn-login');
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Impede o envio padrão do formulário
+                
+                // Mostrar estado de carregamento
+                loginButton.innerHTML = '<i class="bi bi-hourglass-split me-1"></i> Entrando...';
+                loginButton.disabled = true;
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                try {
+                    console.log('Enviando requisição para o servidor...');
+                    
+                    const response = await fetch('processa_login.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email, password }),
+                    });
+                    
+                    console.log('Status da resposta:', response.status);
+                    
+                    // Se a resposta não for ok (status 200-299), lançar erro
+                    if (!response.ok) {
+                        throw new Error(`Erro HTTP: ${response.status}`);
+                    }
+                    
+                    // Obter o texto da resposta para fins de depuração
+                    const responseText = await response.text();
+                    console.log('Resposta bruta:', responseText);
+                    
+                    // Tentar parsear o JSON
+                    let result;
+                    try {
+                        result = JSON.parse(responseText);
+                        console.log('Resposta JSON:', result);
+                    } catch (jsonError) {
+                        console.error('Erro ao parsear JSON:', jsonError);
+                        showMessage('Erro no formato da resposta do servidor', 'danger');
+                        throw jsonError;
+                    }
+
+                    // Processar o resultado
+                    if (result && result.success) {
+                        showMessage('Login realizado com sucesso! Redirecionando...', 'success');
+                        
+                        // Redirecionar após um curto atraso para mostrar a mensagem
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.php';
+                        }, 1500);
+                    } else {
+                        showMessage(result ? result.message : 'Erro desconhecido', 'danger');
+                        
+                        // Restaurar o botão
+                        loginButton.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i> Entrar';
+                        loginButton.disabled = false;
+                    }
+                } catch (error) {
+                    console.error('Erro na requisição:', error);
+                    showMessage('Não foi possível processar sua solicitação. Por favor, tente novamente.', 'danger');
+                    
+                    // Restaurar o botão
+                    loginButton.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i> Entrar';
+                    loginButton.disabled = false;
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
