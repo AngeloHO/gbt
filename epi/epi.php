@@ -1,5 +1,5 @@
 <?php
-require_once 'config/conexao.php'; // Incluir o arquivo de conexão
+require_once '../config/conexao.php'; // Incluir o arquivo de conexão
 session_start();
 connect_local_mysqli('gebert');
 // Verifica se o usuário está logado
@@ -12,7 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 // Dados do usuário logado
 $user = $_SESSION['user'];
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -91,17 +90,17 @@ $user = $_SESSION['user'];
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="sidebar-link active" href="#">
+                            <a class="sidebar-link" href="../dashboard.php">
                                 <i class="bi bi-speedometer2"></i> Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="sidebar-link" href="funcionarios/funcionarios.php">
+                            <a class="sidebar-link" href="../funcionarios/funcionarios.php">
                                 <i class="bi bi-people"></i> Funcionários
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="sidebar-link" href="#">
+                            <a class="sidebar-link active" href="#">
                                 <i class="bi bi-building"></i> EPI
                             </a>
                         </li>
@@ -127,7 +126,7 @@ $user = $_SESSION['user'];
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+                    <h1 class="h2">EPI</h1>
                     <div class="dropdown">
                         <a href="#" class="d-block text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle me-1"></i> <?php echo htmlspecialchars($user['nome'] ?? 'Usuário'); ?>
@@ -143,54 +142,17 @@ $user = $_SESSION['user'];
                     </div>
                 </div>
 
-                <div class="alert alert-success">
-                    <i class="bi bi-check-circle-fill me-2"></i>
-                    Bem-vindo ao Dashboard do Sistema Gebert!
-                </div>
-
                 <div class="row">
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card text-white bg-primary">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="bi bi-people-fill me-2"></i> Usuários</h5>
-                                <p class="card-text display-6">15</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card text-white bg-success">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="bi bi-building me-2"></i> Clientes</h5>
-                                <p class="card-text display-6">42</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card text-white bg-warning">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="bi bi-calendar2-check me-2"></i> Atendimentos</h5>
-                                <p class="card-text display-6">128</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card text-white bg-danger">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="bi bi-exclamation-triangle me-2"></i> Pendências</h5>
-                                <p class="card-text display-6">7</p>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
                 <!-- Conteúdo principal -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="bi bi-activity me-1"></i> Atividade Recente
+
                     </div>
                     <div class="card-body">
-                        <p>Seja bem-vindo ao sistema de gerenciamento Gebert Segurança Patrimonial.</p>
-                        <p>Este é um dashboard de exemplo. Personalize conforme suas necessidades.</p>
+
                     </div>
                 </div>
             </main>

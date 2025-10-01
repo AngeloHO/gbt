@@ -53,15 +53,39 @@ if (empty($dados['nome']) || empty($dados['cpf']) || empty($dados['rg'])) {
     exit;
 }
 
-// Verifica se o CPF já existe no banco
+// Verifica se o CPF já existe no banco e se o status é ativo
 $cpf = $dados['cpf'];
-$sql_check = "SELECT fun_id FROM FUN_FUNCIONARIO WHERE fun_cpf = '$cpf'";
+$sql_check = "SELECT fun_id, fun_status FROM FUN_FUNCIONARIO WHERE fun_cpf = '$cpf'";
 $result_check = mysqli_query($conn, $sql_check);
 
+$readmissao = false;
+$funcionario_id = null;
+
 if (mysqli_num_rows($result_check) > 0) {
-    $response = array('status' => 'error', 'message' => 'Este CPF já está cadastrado');
-    echo json_encode($response);
-    exit;
+    $row = mysqli_fetch_assoc($result_check);
+    $funcionario_id = $row['fun_id'];
+    
+    // Verificar se já existe um funcionário ativo com este CPF, mas apenas se não estiver em modo de edição
+    // ou se for uma edição de um funcionário diferente
+    if (strtolower($row['fun_status']) == 'ativo') {
+        // Se temos um ID no POST (estamos em modo de edição) e o ID corresponde ao funcionário encontrado
+        // então permitimos continuar pois é a edição do mesmo funcionário
+        if (isset($dados['id']) && $dados['id'] == $funcionario_id) {
+            // É o mesmo funcionário sendo editado, então podemos continuar
+            file_put_contents('../debug_log.txt', date('Y-m-d H:i:s') . " - Editando funcionário existente com CPF: $cpf (ID: $funcionario_id)\n", FILE_APPEND);
+            $readmissao = false; // Não é readmissão, é edição
+        } else {
+            // CPF pertence a outro funcionário ativo
+            $response = array('status' => 'error', 'message' => 'Este CPF já está cadastrado para um funcionário ativo');
+            echo json_encode($response);
+            exit;
+        }
+    } else {
+        // Se chegarmos aqui, o funcionário existe mas está inativo, então podemos prosseguir
+        // Registramos no log que estamos readmitindo um funcionário
+        file_put_contents('../debug_log.txt', date('Y-m-d H:i:s') . " - Readmitindo funcionário com CPF: $cpf (ID: $funcionario_id)\n", FILE_APPEND);
+        $readmissao = true;
+    }
 }
 
 // Prepara as certificações (checkboxes)
@@ -83,6 +107,23 @@ if ($salario !== "NULL") {
 
 // ID do usuário que está cadastrando
 $usuario_cadastro = $_SESSION['user_id'];
+
+// Se for fornecido um ID e não for um processo de readmissão, 
+// então estamos tentando editar um funcionário via cadastrar_funcionario.php (erro de URL)
+// Neste caso, redirecionamos para o atualizar_funcionario.php
+if (isset($dados['id']) && !empty($dados['id']) && !$readmissao) {
+    $funcionario_id = $dados['id'];
+    file_put_contents('../debug_log.txt', date('Y-m-d H:i:s') . " - Redirecionando para atualizar_funcionario.php com ID: $funcionario_id\n", FILE_APPEND);
+    
+    // Respondemos com erro para que o cliente reenvie para a URL correta
+    $response = array(
+        'status' => 'redirect', 
+        'message' => 'Esta operação é uma edição, não um novo cadastro. Use a URL atualizar_funcionario.php', 
+        'redirect' => 'atualizar_funcionario.php'
+    );
+    echo json_encode($response);
+    exit;
+}
 
 // Monta a query de inserção
 $sql = "INSERT INTO FUN_FUNCIONARIO (
@@ -130,7 +171,7 @@ $sql = "INSERT INTO FUN_FUNCIONARIO (
             " . (!empty($dados['funcao']) ? "'{$dados['funcao']}'" : "NULL") . ",
             " . (!empty($dados['departamento']) ? "'{$dados['departamento']}'" : "NULL") . ",
             $data_admissao,
-            " . (!empty($dados['status']) ? "'{$dados['status']}'" : "'ativo'") . ",
+            'ativo', /* Define explicitamente como ativo para todos os novos cadastros */
             " . (!empty($dados['turno']) ? "'{$dados['turno']}'" : "NULL") . ",
             $salario,
             '{$dados['observacoes']}',
@@ -141,20 +182,70 @@ $sql = "INSERT INTO FUN_FUNCIONARIO (
             $usuario_cadastro
         )";
 
-// Executa a query
-if (mysqli_query($conn, $sql)) {
-    $id_inserido = mysqli_insert_id($conn);
-    $response = array(
-        'status' => 'success', 
-        'message' => 'Funcionário cadastrado com sucesso!',
-        'id' => $id_inserido
-    );
+// Verificar se é readmissão (update) ou novo cadastro (insert)
+if ($readmissao) {
+    // Prepara a query de UPDATE para readmissão
+    $sql_update = "UPDATE FUN_FUNCIONARIO SET 
+        fun_nome_completo = '{$dados['nome']}',
+        fun_rg = '{$dados['rg']}',
+        fun_data_nascimento = $data_nascimento,
+        fun_telefone = '{$dados['telefone']}',
+        fun_email = '{$dados['email']}',
+        fun_genero = " . (!empty($dados['genero']) ? "'{$dados['genero']}'" : "NULL") . ",
+        fun_cep = '{$dados['cep']}',
+        fun_endereco = '{$dados['endereco']}',
+        fun_numero = '{$dados['numero']}',
+        fun_complemento = '{$dados['complemento']}',
+        fun_bairro = '{$dados['bairro']}',
+        fun_cidade = '{$dados['cidade']}',
+        fun_estado = '{$dados['estado']}',
+        fun_funcao = " . (!empty($dados['funcao']) ? "'{$dados['funcao']}'" : "NULL") . ",
+        fun_departamento = " . (!empty($dados['departamento']) ? "'{$dados['departamento']}'" : "NULL") . ",
+        fun_data_admissao = $data_admissao,
+        fun_status = 'ativo',
+        fun_turno = " . (!empty($dados['turno']) ? "'{$dados['turno']}'" : "NULL") . ",
+        fun_salario = $salario,
+        fun_observacoes = '{$dados['observacoes']}',
+        fun_cert_vigilante = $cert_vigilante,
+        fun_cert_reciclagem = $cert_reciclagem,
+        fun_cert_arma_fogo = $cert_arma,
+        fun_cert_seg_pessoal = $cert_seg_pessoal,
+        fun_usuario_cadastro = $usuario_cadastro
+        WHERE fun_id = $funcionario_id";
+        
+    $sql = $sql_update; // Atualiza a variável sql para log de erros
+    
+    // Executa o UPDATE
+    if (mysqli_query($conn, $sql_update)) {
+        $response = array(
+            'status' => 'success', 
+            'message' => 'Funcionário readmitido com sucesso!',
+            'id' => $funcionario_id,
+            'readmissao' => true
+        );
+    } else {
+        $response = array(
+            'status' => 'error', 
+            'message' => 'Erro ao readmitir funcionário: ' . mysqli_error($conn),
+            'query' => $sql_update
+        );
+    }
 } else {
-    $response = array(
-        'status' => 'error', 
-        'message' => 'Erro ao cadastrar funcionário: ' . mysqli_error($conn),
-        'query' => $sql
-    );
+    // Executa a query de INSERT para novo cadastro
+    if (mysqli_query($conn, $sql)) {
+        $id_inserido = mysqli_insert_id($conn);
+        $response = array(
+            'status' => 'success', 
+            'message' => 'Funcionário cadastrado com sucesso!',
+            'id' => $id_inserido
+        );
+    } else {
+        $response = array(
+            'status' => 'error', 
+            'message' => 'Erro ao cadastrar funcionário: ' . mysqli_error($conn),
+            'query' => $sql
+        );
+    }
 }
 
 // Fecha a conexão

@@ -94,7 +94,7 @@ $user = $_SESSION['user'];
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="sidebar-link" href="#">
+                            <a class="sidebar-link" href="../dashboard.php">
                                 <i class="bi bi-speedometer2"></i> Dashboard
                             </a>
                         </li>
@@ -104,8 +104,8 @@ $user = $_SESSION['user'];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="sidebar-link" href="#">
-                                <i class="bi bi-building"></i> Clientes
+                            <a class="sidebar-link" href="../epi/epi.php">
+                                <i class="bi bi-building"></i> EPI
                             </a>
                         </li>
                         <li class="nav-item">
@@ -126,6 +126,7 @@ $user = $_SESSION['user'];
                     </ul>
                 </div>
             </div>
+
 
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -149,7 +150,7 @@ $user = $_SESSION['user'];
 
                 <div class="row">
                     <div class="col-md-6 col-lg-3 mb-4">
-                        <button type="button" class="btn btn-primary rounded-pill shadow-sm" data-bs-toggle="modal" data-bs-target="#cadastroFuncionarioModal">
+                        <button type="button" id="btnCadastrarFuncionario" class="btn btn-primary rounded-pill shadow-sm" data-bs-toggle="modal" data-bs-target="#cadastroFuncionarioModal">
                             <i class="bi bi-person-plus me-2"></i>Cadastrar Funcionário
                         </button>
                     </div>
@@ -507,10 +508,224 @@ $user = $_SESSION['user'];
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JQuery (necessário para algumas funcionalidades) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Script de Debugging -->
+    <script>
+        // Função para log de erro personalizado
+        window.onerror = function(message, source, lineno, colno, error) {
+            console.error('Erro JavaScript:', message);
+            console.error('Arquivo:', source);
+            console.error('Linha:', lineno);
+            console.error('Coluna:', colno);
+            console.error('Objeto de erro:', error);
+
+            // Criar elemento visual para mostrar erro
+            var errorDiv = document.createElement('div');
+            errorDiv.style.position = 'fixed';
+            errorDiv.style.top = '10px';
+            errorDiv.style.left = '10px';
+            errorDiv.style.backgroundColor = 'red';
+            errorDiv.style.color = 'white';
+            errorDiv.style.padding = '10px';
+            errorDiv.style.borderRadius = '5px';
+            errorDiv.style.zIndex = '9999';
+            errorDiv.innerHTML = 'Erro: ' + message + '<br>Arquivo: ' + source + '<br>Linha: ' + lineno;
+            document.body.appendChild(errorDiv);
+
+            // Remover após 10 segundos
+            setTimeout(function() {
+                document.body.removeChild(errorDiv);
+            }, 10000);
+
+            return false; // Permite que o erro seja processado normalmente
+        };
+
+        // Definir função adicionarEventosAcoes globalmente como fallback
+        window.adicionarEventosAcoes = window.adicionarEventosAcoes || function() {
+            console.log('[Fallback] Adicionando eventos aos botões');
+
+            document.querySelectorAll('.btn-visualizar').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    console.log('Clique em visualizar ID:', id);
+                    alert('Função de visualização não disponível. ID: ' + id);
+                });
+            });
+
+            document.querySelectorAll('.btn-editar').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    console.log('Clique em editar ID:', id);
+                    alert('Função de edição não disponível. ID: ' + id);
+                });
+            });
+
+            document.querySelectorAll('.btn-status').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const status = this.getAttribute('data-status');
+                    console.log('Clique em alterar status ID:', id, 'Status:', status);
+                    alert('Função de alteração de status não disponível. ID: ' + id + ', Status: ' + status);
+                });
+            });
+        };
+    </script>
+
+    <!-- Funções para ações de funcionários (visualizar, editar, alterar status) -->
+    <script src="../assets/js/funcionarios-acoes.js"></script>
     <!-- Custom JS -->
     <script src="../assets/js/funcionarios.js"></script>
-    <!-- Fix para o modal -->
-    <script src="../assets/js/modal-fix.js"></script>
+    <!-- Fix para o modal (versão avançada) -->
+    <script src="../assets/js/modal-fix-enhanced.js"></script>
+    <!-- Eventos de modal -->
+    <script src="../assets/js/modal-events.js"></script>
+
+    <!-- Script para garantir limpeza dos backdrops e reset de formulário -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Função para limpar todos os backdrops e restaurar o body
+            function limparBackdrops() {
+                // Remover todas as classes relacionadas à modal do body
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
+
+                // Remover backdrop manualmente
+                const backdrops = document.querySelectorAll('.modal-backdrop');
+                backdrops.forEach(function(backdrop) {
+                    backdrop.classList.remove('show');
+                    backdrop.classList.remove('fade');
+                    backdrop.parentNode.removeChild(backdrop);
+                });
+
+                console.log('Limpeza forçada de backdrops realizada');
+            }
+
+            // Limpar backdrops no carregamento inicial
+            limparBackdrops();
+
+            // Verificar backdrops a cada 3 segundos
+            setInterval(function() {
+                const hasBackdrop = document.querySelectorAll('.modal-backdrop').length > 0;
+                const modals = document.querySelectorAll('.modal.show');
+
+                if (hasBackdrop && modals.length === 0) {
+                    console.log('Backdrop detectado sem modal ativa, limpando...');
+                    limparBackdrops();
+                }
+            }, 3000);
+
+            // Adicionar evento ao botão de cadastrar funcionário para limpar o formulário
+            const btnCadastrarFuncionario = document.getElementById('btnCadastrarFuncionario');
+            if (btnCadastrarFuncionario) {
+                btnCadastrarFuncionario.addEventListener('click', function() {
+                    console.log('Botão cadastrar funcionário clicado, limpando formulário');
+
+                    // Resetar o formulário
+                    const form = document.getElementById('formCadastroFuncionario');
+                    if (form) {
+                        // Limpar todos os campos
+                        form.reset();
+
+                        // Remover campo de ID se existir (usado na edição)
+                        const idField = form.querySelector('input[name="id"]');
+                        if (idField) {
+                            idField.remove();
+                        }
+
+                        // Restaurar o modo do formulário para cadastro
+                        form.setAttribute('data-mode', 'create');
+
+                        // Restaurar o título do modal
+                        const modalTitle = document.querySelector('#cadastroFuncionarioModalLabel');
+                        if (modalTitle) {
+                            modalTitle.innerHTML = '<i class="bi bi-person-plus-fill me-2"></i>Cadastro de Funcionário';
+                        }
+
+                        // Restaurar texto do botão salvar
+                        const btnSalvar = document.getElementById('btnSalvarFuncionario');
+                        if (btnSalvar) {
+                            btnSalvar.textContent = 'Salvar';
+                            btnSalvar.disabled = false;
+                        }
+
+                        console.log('Formulário resetado com sucesso');
+                    } else {
+                        console.error('Formulário não encontrado');
+                    }
+                });
+            } else {
+                console.error('Botão cadastrar funcionário não encontrado');
+            }
+        });
+    </script>
+
+    <!-- Verificação inicial dos botões após carregamento -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM completamente carregado no script de verificação');
+
+            // Forçar o carregamento da tabela
+            if (typeof window.carregarFuncionarios === 'function') {
+                window.carregarFuncionarios();
+            } else {
+                console.error('Função carregarFuncionarios não está disponível');
+            }
+
+            // Forçar a adição de eventos aos botões de ação após um pequeno delay
+            setTimeout(function() {
+                console.log('Verificando botões de ação...');
+
+                // Teste de disponibilidade das funções
+                if (typeof window.visualizarFuncionario !== 'function') {
+                    console.error('Função visualizarFuncionario não está disponível!');
+                } else {
+                    console.log('Função visualizarFuncionario está disponível');
+                }
+
+                if (typeof window.editarFuncionario !== 'function') {
+                    console.error('Função editarFuncionario não está disponível!');
+                } else {
+                    console.log('Função editarFuncionario está disponível');
+                }
+
+                if (typeof window.alterarStatusFuncionario !== 'function') {
+                    console.error('Função alterarStatusFuncionario não está disponível!');
+                } else {
+                    console.log('Função alterarStatusFuncionario está disponível');
+                }
+
+                // Adicionar novamente os listeners, por segurança
+                document.querySelectorAll('.btn-visualizar').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        console.log('Clique em visualizar ID:', id);
+                        window.visualizarFuncionario(id);
+                    });
+                });
+
+                document.querySelectorAll('.btn-editar').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        console.log('Clique em editar ID:', id);
+                        window.editarFuncionario(id);
+                    });
+                });
+
+                document.querySelectorAll('.btn-status').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const status = this.getAttribute('data-status');
+                        console.log('Clique em alterar status ID:', id, 'Para status:', status);
+                        window.alterarStatusFuncionario(id, status, this);
+                    });
+                });
+
+            }, 500);
+        });
+    </script>
 </body>
 
 </html>
