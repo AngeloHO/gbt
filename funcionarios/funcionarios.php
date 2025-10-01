@@ -161,7 +161,7 @@ $user = $_SESSION['user'];
                                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body p-4">
-                                    <form id="formCadastroFuncionario" method="post" action="cadastrar_funcionario.php">
+                                    <form id="formCadastroFuncionario">
                                         <!-- Nav tabs para organização -->
                                         <ul class="nav nav-tabs nav-fill mb-4" id="cadastroTab" role="tablist">
                                             <li class="nav-item" role="presentation">
@@ -444,7 +444,7 @@ $user = $_SESSION['user'];
                                         <button type="button" class="btn btn-outline-primary rounded-pill px-4 me-2" id="btnLimpar">
                                             <i class="bi bi-eraser me-2"></i>Limpar
                                         </button>
-                                        <button type="submit" form="formCadastroFuncionario" class="btn btn-primary rounded-pill px-4" id="btnSalvarFuncionario">
+                                        <button type="button" class="btn btn-primary rounded-pill px-4" id="btnSalvarFuncionario">
                                             <i class="bi bi-check-circle me-2"></i>Salvar Cadastro
                                         </button>
                                     </div>
@@ -509,6 +509,8 @@ $user = $_SESSION['user'];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="../assets/js/funcionarios.js"></script>
+    <!-- Fix para o modal -->
+    <script src="../assets/js/modal-fix.js"></script>
 </body>
 
 </html>

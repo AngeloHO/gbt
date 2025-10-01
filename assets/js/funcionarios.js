@@ -1,11 +1,210 @@
 // Início do script
 
 
+// Definindo a função carregarFuncionarios no escopo global para que esteja disponível em todos os lugares
+window.carregarFuncionarios = function(pagina = 1) {
+    const tabelaBody = document.querySelector('#tabelaFuncionarios tbody');
+    const totalRegistros = document.getElementById('totalRegistros');
+    const paginacaoLinks = document.getElementById('paginacaoLinks');
+    
+    if (!tabelaBody) {
+        console.log('Tabela de funcionários não encontrada no DOM. Ignorando carregamento.');
+        return;
+    }
+    
+    // Exibir indicador de carregamento
+    tabelaBody.innerHTML = '<tr><td colspan="6" class="text-center"><div class="spinner-border spinner-border-sm text-primary" role="status"></div> Carregando...</td></tr>';
+    
+    // Obter elemento de pesquisa se existir
+    const campoPesquisa = document.getElementById('pesquisaFuncionario');
+    
+    // Preparar parâmetros da busca
+    const busca = campoPesquisa ? campoPesquisa.value.trim() : '';
+    const limite = 10; // Registros por página
+    
+    // Fazer requisição AJAX
+    fetch(`listar_funcionarios.php?pagina=${pagina}&limite=${limite}&busca=${encodeURIComponent(busca)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                atualizarTabelaFuncionarios(data, tabelaBody, totalRegistros, paginacaoLinks);
+            } else {
+                tabelaBody.innerHTML = '<tr><td colspan="6" class="text-center">Erro ao carregar funcionários</td></tr>';
+                console.error('Erro:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar funcionários:', error);
+            tabelaBody.innerHTML = '<tr><td colspan="6" class="text-center">Erro de conexão</td></tr>';
+        });
+};
+
+// Função auxiliar para atualizar a tabela
+function atualizarTabelaFuncionarios(data, tabelaBody, totalRegistros, paginacaoLinks) {
+    const funcionarios = data.funcionarios;
+    
+    // Atualizar contagem de registros
+    if (totalRegistros) {
+        totalRegistros.textContent = data.paginacao?.total_registros || 0;
+    }
+    
+    // Limpar tabela
+    tabelaBody.innerHTML = '';
+    
+    if (funcionarios && funcionarios.length === 0) {
+        tabelaBody.innerHTML = '<tr><td colspan="6" class="text-center">Nenhum funcionário encontrado</td></tr>';
+        return;
+    }
+    
+    // Preencher tabela com os funcionários
+    if (funcionarios) {
+        funcionarios.forEach(funcionario => {
+            tabelaBody.innerHTML += `
+                <tr>
+                    <td>${funcionario.nome || ''}</td>
+                    <td>${funcionario.cpf || ''}</td>
+                    <td>${funcionario.funcao || ''}</td>
+                    <td>${funcionario.telefone || ''}</td>
+                    <td>
+                        <span class="badge bg-${funcionario.status_classe || 'secondary'}">
+                            ${funcionario.status_texto || 'N/A'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-outline-info btn-visualizar" data-id="${funcionario.id}" title="Visualizar">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-primary btn-editar" data-id="${funcionario.id}" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger btn-excluir" data-id="${funcionario.id}" title="Excluir">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+    
+    // Configurar paginação se existir
+    if (paginacaoLinks && data.paginacao) {
+        configurarPaginacao(data.paginacao, paginacaoLinks);
+    }
+}
+
+// Função auxiliar para configurar paginação
+function configurarPaginacao(paginacao, paginacaoLinks) {
+    const totalPaginas = paginacao.total_paginas;
+    const paginaAtual = paginacao.pagina_atual;
+    
+    let html = '';
+    
+    // Botão anterior
+    html += `
+        <li class="page-item ${paginaAtual === 1 ? 'disabled' : ''}">
+            <button class="page-link" data-pagina="${paginaAtual - 1}" ${paginaAtual === 1 ? 'disabled' : ''}>
+                <i class="bi bi-chevron-left"></i>
+            </button>
+        </li>
+    `;
+    
+    // Páginas
+    const mostrarPaginas = 5;
+    const metade = Math.floor(mostrarPaginas / 2);
+    
+    let inicio = paginaAtual - metade;
+    if (inicio < 1) inicio = 1;
+    
+    let fim = inicio + mostrarPaginas - 1;
+    if (fim > totalPaginas) {
+        fim = totalPaginas;
+        inicio = Math.max(1, fim - mostrarPaginas + 1);
+    }
+    
+    for (let i = inicio; i <= fim; i++) {
+        html += `
+            <li class="page-item ${i === paginaAtual ? 'active' : ''}">
+                <button class="page-link" data-pagina="${i}">${i}</button>
+            </li>
+        `;
+    }
+    
+    // Botão próximo
+    html += `
+        <li class="page-item ${paginaAtual === totalPaginas ? 'disabled' : ''}">
+            <button class="page-link" data-pagina="${paginaAtual + 1}" ${paginaAtual === totalPaginas ? 'disabled' : ''}>
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </li>
+    `;
+    
+    paginacaoLinks.innerHTML = html;
+    
+    // Adicionar eventos aos links de paginação
+    document.querySelectorAll('#paginacaoLinks .page-link').forEach(link => {
+        link.addEventListener('click', function() {
+            if (this.hasAttribute('disabled')) return;
+            const pagina = parseInt(this.getAttribute('data-pagina'), 10);
+            carregarFuncionarios(pagina);
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM totalmente carregado');
+    
     // Referência ao formulário e modal
     const form = document.getElementById('formCadastroFuncionario');
+    console.log('Formulário encontrado?', !!form);
+    
     const modal = document.getElementById('cadastroFuncionarioModal');
-    const modalInstance = bootstrap.Modal.getInstance(modal);
+    console.log('Modal encontrado?', !!modal);
+    
+    // Criamos uma variável global para a instância do modal
+    window.funcionarioModalInstance = null;
+    
+    if (modal) {
+        // Primeiro, tentar obter instância existente
+        try {
+            window.funcionarioModalInstance = bootstrap.Modal.getInstance(modal);
+            console.log('Instância de modal existente obtida');
+        } catch (e) {
+            console.log('Modal ainda não foi inicializado, criando nova instância');
+        }
+        
+        // Se não existir, inicializar
+        if (!window.funcionarioModalInstance && typeof bootstrap !== 'undefined') {
+            try {
+                window.funcionarioModalInstance = new bootstrap.Modal(modal);
+                console.log('Nova instância de modal criada');
+            } catch (e) {
+                console.log('Erro ao criar instância do modal:', e);
+            }
+        }
+    }
+    
+    // Verificar botão de salvar
+    const btnSalvarCheck = document.getElementById('btnSalvarFuncionario');
+    console.log('Botão salvar encontrado?', !!btnSalvarCheck);
+    if (btnSalvarCheck) {
+        console.log('ID do botão:', btnSalvarCheck.id);
+        console.log('Texto do botão:', btnSalvarCheck.textContent);
+    }
+    
+    // Adiciona listener para o evento de modal sendo mostrado
+    if (modal) {
+        modal.addEventListener('shown.bs.modal', function() {
+            console.log('Modal foi aberto, atualizando referência da instância');
+            try {
+                window.funcionarioModalInstance = bootstrap.Modal.getInstance(modal);
+                console.log('Instância do modal atualizada após abertura');
+            } catch (e) {
+                console.log('Erro ao obter instância após abertura:', e);
+            }
+        });
+    }
     
     // Elementos DOM frequentemente usados
     const elementos = {
@@ -16,8 +215,14 @@ document.addEventListener('DOMContentLoaded', function() {
         btnLimpar: document.getElementById('btnLimpar')
     };
     
-    // Carregar lista de funcionários ao iniciar
-    carregarFuncionarios();
+    // Tentar carregar lista de funcionários ao iniciar (se a tabela existir)
+    if (document.querySelector('#tabelaFuncionarios tbody')) {
+        try {
+            carregarFuncionarios();
+        } catch (e) {
+            console.error('Erro ao carregar funcionários:', e);
+        }
+    }
     
     // Configurar evento de pesquisa
     if (elementos.btnPesquisar) {
@@ -259,10 +464,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Submissão do formulário
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+    // Submissão do formulário via botão (não mais via evento submit)
+    const btnSalvar = document.getElementById('btnSalvarFuncionario');
+    console.log('Configurando evento click no btnSalvar:', btnSalvar);
+    
+    if (btnSalvar && form) {
+        // Adiciona evento ao botão salvar
+        btnSalvar.addEventListener('click', function(e) {
+            e.preventDefault(); // Previne qualquer comportamento padrão
+            console.log('Botão salvar clicado!');
             
             // Validar o formulário
             const validation = validateForm();
@@ -272,59 +482,75 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Desabilitar botão para evitar múltiplos envios
-            const btnSalvar = document.getElementById('btnSalvarFuncionario');
-            const btnSalvarOriginalText = btnSalvar.innerHTML;
-            btnSalvar.disabled = true;
-            btnSalvar.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Salvando...';
+            const btnSalvarOriginalText = this.innerHTML;
+            this.disabled = true;
+            this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Salvando...';
             
             // Preparar dados para envio
             const formData = new FormData(form);
             
+            console.log('Enviando formulário via AJAX...');
+            
+            // URL fixa para o processamento do formulário
+            const actionUrl = 'cadastrar_funcionario.php';
+            
             // Enviar requisição AJAX
-            fetch(form.getAttribute('action'), {
+            fetch(actionUrl, {
                 method: 'POST',
-                body: formData
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest' // Indica que é uma requisição AJAX
+                }
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Resposta recebida:', response);
+                if (!response.ok) {
+                    throw new Error('Erro na resposta do servidor: ' + response.status);
+                }
+                return response.json();
+            })
             .then(data => {
-                // Habilitar botão novamente
-                btnSalvar.disabled = false;
-                btnSalvar.innerHTML = btnSalvarOriginalText;
+                console.log('Dados recebidos:', data);
+                // Sempre habilita o botão novamente
+                this.disabled = false;
+                this.innerHTML = btnSalvarOriginalText;
                 
                 if (data.status === 'success') {
-                    showNotification('success', data.message);
+                    console.log('Cadastro bem-sucedido!');
+                    // Mostrar alerta de sucesso
+                    showNotification('success', data.message || 'Funcionário cadastrado com sucesso!');
                     
                     // Limpar formulário
                     form.reset();
                     
-                    // Fechar o modal após um breve delay
-                    setTimeout(() => {
-                        const modalElement = document.getElementById('cadastroFuncionarioModal');
-                        const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                        modalInstance.hide();
-                        
-                        // Recarregar a tabela de funcionários (se existir)
-                        if (typeof carregarFuncionarios === 'function') {
+                    // Recarregar a tabela de funcionários sem recarregar a página
+                    console.log('Tentando atualizar a tabela de funcionários');
+                    if (document.querySelector('#tabelaFuncionarios')) {
+                        try {
                             carregarFuncionarios();
-                        } else {
-                            // Ou recarregar a página após um breve delay
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 1500);
+                        } catch (e) {
+                            console.error('Erro ao recarregar funcionários:', e);
+                            setTimeout(() => window.location.reload(), 1500);
                         }
-                    }, 1500);
+                    }
                 } else {
-                    showNotification('error', data.message);
+                    // Mostrar mensagem de erro
+                    showNotification('error', data.message || 'Erro ao cadastrar funcionário.');
                 }
             })
             .catch(error => {
-                console.error('Erro:', error);
-                showNotification('error', 'Erro ao processar a requisição. Tente novamente.');
+                console.error('Erro durante o envio do formulário:', error);
+                showNotification('error', 'Erro ao processar a requisição: ' + error.message);
                 
                 // Habilitar botão novamente
-                btnSalvar.disabled = false;
-                btnSalvar.innerHTML = btnSalvarOriginalText;
+                this.disabled = false;
+                this.innerHTML = btnSalvarOriginalText;
             });
+        });
+    } else {
+        console.error('Botão de salvar ou formulário não encontrado!', {
+            btnSalvar: btnSalvar ? 'encontrado' : 'não encontrado',
+            form: form ? 'encontrado' : 'não encontrado'
         });
     }
 

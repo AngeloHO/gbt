@@ -2,11 +2,23 @@
 require_once '../config/conexao.php';
 session_start();
 
+// Configurações para depuração
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Registre todas as tentativas de acesso para depuração
+file_put_contents('../debug_log.txt', date('Y-m-d H:i:s') . " - Acesso ao cadastrar_funcionario.php\n", FILE_APPEND);
+file_put_contents('../debug_log.txt', "Headers: " . json_encode(getallheaders()) . "\n", FILE_APPEND);
+file_put_contents('../debug_log.txt', "POST: " . json_encode($_POST) . "\n", FILE_APPEND);
+
+// Verificação da chamada AJAX foi removida para testes
+
 // Verifica se o usuário está logado
 if (!isset($_SESSION['user_id'])) {
     $response = array('status' => 'error', 'message' => 'Usuário não autenticado');
+    header('Content-Type: application/json');
     echo json_encode($response);
-    exit;
+    exit();
 }
 
 // Verifica se é uma requisição POST
@@ -148,7 +160,12 @@ if (mysqli_query($conn, $sql)) {
 // Fecha a conexão
 mysqli_close($conn);
 
-// Retorna a resposta como JSON
+// Registre a resposta para depuração
+file_put_contents('../debug_log.txt', "Resposta: " . json_encode($response) . "\n\n", FILE_APPEND);
+
+// Certifica-se de que nada mais será executado após isso
 header('Content-Type: application/json');
+header('Cache-Control: no-cache, no-store, must-revalidate');
 echo json_encode($response);
+exit();
 ?>
