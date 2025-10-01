@@ -27,6 +27,9 @@ $user = $_SESSION['user'];
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/funcionarios.css">
+
     <style>
         .sidebar {
             min-height: 100vh;
@@ -145,55 +148,367 @@ $user = $_SESSION['user'];
 
 
                 <div class="row">
-                    <!-- <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card text-white bg-primary">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="bi bi-people-fill me-2"></i> Usuários</h5>
-                                <p class="card-text display-6">15</p>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <button type="button" class="btn btn-primary rounded-pill shadow-sm" data-bs-toggle="modal" data-bs-target="#cadastroFuncionarioModal">
+                            <i class="bi bi-person-plus me-2"></i>Cadastrar Funcionário
+                        </button>
+                    </div>
+                    <div class="modal fade" id="cadastroFuncionarioModal" tabindex="-1" aria-labelledby="cadastroFuncionarioModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content rounded-4 shadow">
+                                <div class="modal-header bg-primary bg-gradient text-white border-bottom-0">
+                                    <h1 class="modal-title fs-4" id="cadastroFuncionarioModalLabel"><i class="bi bi-person-plus-fill me-2"></i>Cadastro de Funcionário</h1>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <form id="formCadastroFuncionario" method="post" action="cadastrar_funcionario.php">
+                                        <!-- Nav tabs para organização -->
+                                        <ul class="nav nav-tabs nav-fill mb-4" id="cadastroTab" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="dados-pessoais-tab" data-bs-toggle="tab" data-bs-target="#dados-pessoais" type="button" role="tab" aria-controls="dados-pessoais" aria-selected="true">
+                                                    <i class="bi bi-person me-1"></i> Dados Pessoais
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="endereco-tab" data-bs-toggle="tab" data-bs-target="#endereco" type="button" role="tab" aria-controls="endereco" aria-selected="false">
+                                                    <i class="bi bi-geo-alt me-1"></i> Endereço
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="funcao-tab" data-bs-toggle="tab" data-bs-target="#funcao" type="button" role="tab" aria-controls="funcao" aria-selected="false">
+                                                    <i class="bi bi-briefcase me-1"></i> Função
+                                                </button>
+                                            </li>
+                                        </ul>
+
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <!-- Dados Pessoais -->
+                                            <div class="tab-pane fade show active" id="dados-pessoais" role="tabpanel" aria-labelledby="dados-pessoais-tab">
+                                                <div class="card border-0 shadow-sm mb-3">
+                                                    <div class="card-body">
+                                                        <div class="row g-3">
+                                                            <div class="col-md-6">
+                                                                <label for="nome" class="form-label fw-semibold">
+                                                                    <i class="bi bi-person-badge me-1 text-primary"></i>Nome Completo
+                                                                </label>
+                                                                <input type="text" class="form-control form-control-lg border-0 shadow-sm bg-light" id="nome" name="nome" required style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase();">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="cpf" class="form-label fw-semibold">
+                                                                    <i class="bi bi-card-text me-1 text-primary"></i>CPF
+                                                                </label>
+                                                                <input type="text" class="form-control border-0 shadow-sm bg-light" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="rg" class="form-label fw-semibold">
+                                                                    <i class="bi bi-card-heading me-1 text-primary"></i>RG
+                                                                </label>
+                                                                <input type="text" class="form-control border-0 shadow-sm bg-light" id="rg" name="rg" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase();">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="dataNascimento" class="form-label fw-semibold">
+                                                                    <i class="bi bi-calendar-event me-1 text-primary"></i>Data de Nascimento
+                                                                </label>
+                                                                <input type="date" class="form-control border-0 shadow-sm bg-light" id="dataNascimento" name="dataNascimento">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="telefone" class="form-label fw-semibold">
+                                                                    <i class="bi bi-telephone me-1 text-primary"></i>Telefone/Celular
+                                                                </label>
+                                                                <input type="text" class="form-control border-0 shadow-sm bg-light" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="email" class="form-label fw-semibold">
+                                                                    <i class="bi bi-envelope me-1 text-primary"></i>E-mail
+                                                                </label>
+                                                                <input type="email" class="form-control border-0 shadow-sm bg-light" id="email" name="email">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="genero" class="form-label fw-semibold">
+                                                                    <i class="bi bi-gender-ambiguous me-1 text-primary"></i>Gênero
+                                                                </label>
+                                                                <select class="form-select border-0 shadow-sm bg-light" id="genero" name="genero">
+                                                                    <option value="" selected>Selecione</option>
+                                                                    <option value="masculino">Masculino</option>
+                                                                    <option value="feminino">Feminino</option>
+                                                                    <option value="outro">Outro</option>
+                                                                    <option value="naoInformar">Prefiro não informar</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Endereço -->
+                                            <div class="tab-pane fade" id="endereco" role="tabpanel" aria-labelledby="endereco-tab">
+                                                <div class="card border-0 shadow-sm mb-3">
+                                                    <div class="card-body">
+                                                        <div class="row g-3">
+                                                            <div class="col-md-4">
+                                                                <label for="cep" class="form-label fw-semibold">
+                                                                    <i class="bi bi-geo me-1 text-primary"></i>CEP
+                                                                </label>
+                                                                <input type="text" class="form-control border-0 shadow-sm bg-light" id="cep" name="cep" placeholder="00000-000" maxlength="9">
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <label for="endereco" class="form-label fw-semibold">
+                                                                    <i class="bi bi-signpost me-1 text-primary"></i>Endereço
+                                                                </label>
+                                                                <input type="text" class="form-control border-0 shadow-sm bg-light" id="endereco" name="endereco" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase();">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="numero" class="form-label fw-semibold">
+                                                                    <i class="bi bi-house-door me-1 text-primary"></i>Número
+                                                                </label>
+                                                                <input type="text" class="form-control border-0 shadow-sm bg-light" id="numero" name="numero" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase();">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="complemento" class="form-label fw-semibold">
+                                                                    <i class="bi bi-plus-square me-1 text-primary"></i>Complemento
+                                                                </label>
+                                                                <input type="text" class="form-control border-0 shadow-sm bg-light" id="complemento" name="complemento" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase();">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="bairro" class="form-label fw-semibold">
+                                                                    <i class="bi bi-pin-map me-1 text-primary"></i>Bairro
+                                                                </label>
+                                                                <input type="text" class="form-control border-0 shadow-sm bg-light" id="bairro" name="bairro" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase();">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="cidade" class="form-label fw-semibold">
+                                                                    <i class="bi bi-building me-1 text-primary"></i>Cidade
+                                                                </label>
+                                                                <input type="text" class="form-control border-0 shadow-sm bg-light" id="cidade" name="cidade" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase();">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="estado" class="form-label fw-semibold">
+                                                                    <i class="bi bi-map me-1 text-primary"></i>Estado
+                                                                </label>
+                                                                <select class="form-select border-0 shadow-sm bg-light" id="estado" name="estado">
+                                                                    <option value="" selected>Selecione o Estado</option>
+                                                                    <option value="AC">Acre</option>
+                                                                    <option value="AL">Alagoas</option>
+                                                                    <option value="AP">Amapá</option>
+                                                                    <option value="AM">Amazonas</option>
+                                                                    <option value="BA">Bahia</option>
+                                                                    <option value="CE">Ceará</option>
+                                                                    <option value="DF">Distrito Federal</option>
+                                                                    <option value="ES">Espírito Santo</option>
+                                                                    <option value="GO">Goiás</option>
+                                                                    <option value="MA">Maranhão</option>
+                                                                    <option value="MT">Mato Grosso</option>
+                                                                    <option value="MS">Mato Grosso do Sul</option>
+                                                                    <option value="MG">Minas Gerais</option>
+                                                                    <option value="PA">Pará</option>
+                                                                    <option value="PB">Paraíba</option>
+                                                                    <option value="PR">Paraná</option>
+                                                                    <option value="PE">Pernambuco</option>
+                                                                    <option value="PI">Piauí</option>
+                                                                    <option value="RJ">Rio de Janeiro</option>
+                                                                    <option value="RN">Rio Grande do Norte</option>
+                                                                    <option value="RS">Rio Grande do Sul</option>
+                                                                    <option value="RO">Rondônia</option>
+                                                                    <option value="RR">Roraima</option>
+                                                                    <option value="SC">Santa Catarina</option>
+                                                                    <option value="SP">São Paulo</option>
+                                                                    <option value="SE">Sergipe</option>
+                                                                    <option value="TO">Tocantins</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Função -->
+                                            <div class="tab-pane fade" id="funcao" role="tabpanel" aria-labelledby="funcao-tab">
+                                                <div class="card border-0 shadow-sm mb-3">
+                                                    <div class="card-body">
+                                                        <div class="row g-3">
+                                                            <div class="col-md-6">
+                                                                <label for="funcao" class="form-label fw-semibold">
+                                                                    <i class="bi bi-briefcase me-1 text-primary"></i>Função
+                                                                </label>
+                                                                <select class="form-select border-0 shadow-sm bg-light" id="funcao" name="funcao">
+                                                                    <option value="" selected>Selecione a função</option>
+                                                                    <option value="vigilante">Vigilante</option>
+                                                                    <option value="porteiro">Porteiro</option>
+                                                                    <option value="seguranca">Segurança</option>
+                                                                    <option value="supervisor">Supervisor</option>
+                                                                    <option value="coordenador">Coordenador</option>
+                                                                    <option value="administrador">Administrador</option>
+                                                                    <option value="outro">Outro</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="departamento" class="form-label fw-semibold">
+                                                                    <i class="bi bi-diagram-3 me-1 text-primary"></i>Departamento
+                                                                </label>
+                                                                <select class="form-select border-0 shadow-sm bg-light" id="departamento" name="departamento">
+                                                                    <option value="" selected>Selecione o departamento</option>
+                                                                    <option value="operacional">Operacional</option>
+                                                                    <option value="administrativo">Administrativo</option>
+                                                                    <option value="comercial">Comercial</option>
+                                                                    <option value="rh">Recursos Humanos</option>
+                                                                    <option value="financeiro">Financeiro</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="dataAdmissao" class="form-label fw-semibold">
+                                                                    <i class="bi bi-calendar-check me-1 text-primary"></i>Data de Admissão
+                                                                </label>
+                                                                <input type="date" class="form-control border-0 shadow-sm bg-light" id="dataAdmissao" name="dataAdmissao">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="status" class="form-label fw-semibold">
+                                                                    <i class="bi bi-toggle-on me-1 text-primary"></i>Status
+                                                                </label>
+                                                                <select class="form-select border-0 shadow-sm bg-light" id="status" name="status">
+                                                                    <option value="ativo" selected>Ativo</option>
+                                                                    <option value="inativo">Inativo</option>
+                                                                    <option value="ferias">Em férias</option>
+                                                                    <option value="licenca">Em licença</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="turno" class="form-label fw-semibold">
+                                                                    <i class="bi bi-clock me-1 text-primary"></i>Turno
+                                                                </label>
+                                                                <select class="form-select border-0 shadow-sm bg-light" id="turno" name="turno">
+                                                                    <option value="" selected>Selecione o turno</option>
+                                                                    <option value="manha">Manhã (06:00 - 14:00)</option>
+                                                                    <option value="tarde">Tarde (14:00 - 22:00)</option>
+                                                                    <option value="noite">Noite (22:00 - 06:00)</option>
+                                                                    <option value="comercial">Comercial (08:00 - 17:00)</option>
+                                                                    <option value="escala12x36">Escala 12x36</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="salario" class="form-label fw-semibold">
+                                                                    <i class="bi bi-cash-coin me-1 text-primary"></i>Salário
+                                                                </label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text bg-light border-0 shadow-sm">R$</span>
+                                                                    <input type="text" class="form-control border-0 shadow-sm bg-light" id="salario" name="salario" placeholder="0,00">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <label for="observacoes" class="form-label fw-semibold">
+                                                                    <i class="bi bi-chat-square-text me-1 text-primary"></i>Observações
+                                                                </label>
+                                                                <textarea class="form-control border-0 shadow-sm bg-light" id="observacoes" name="observacoes" rows="3" placeholder="Informações adicionais sobre a função do funcionário..."></textarea>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="certificacoes" class="form-label fw-semibold">
+                                                                    <i class="bi bi-award me-1 text-primary"></i>Certificações
+                                                                </label>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="vigilante" id="certVigilante" name="certificacoes[]">
+                                                                    <label class="form-check-label" for="certVigilante">
+                                                                        Curso de Vigilante
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="reciclagem" id="certReciclagem" name="certificacoes[]">
+                                                                    <label class="form-check-label" for="certReciclagem">
+                                                                        Reciclagem em dia
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="armadefogo" id="certArma" name="certificacoes[]">
+                                                                    <label class="form-check-label" for="certArma">
+                                                                        Porte de arma
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="segurancapessoal" id="certSegPessoal" name="certificacoes[]">
+                                                                    <label class="form-check-label" for="certSegPessoal">
+                                                                        Segurança Pessoal
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer border-top-0 justify-content-between">
+                                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+                                        <i class="bi bi-x-circle me-2"></i>Cancelar
+                                    </button>
+                                    <div>
+                                        <button type="button" class="btn btn-outline-primary rounded-pill px-4 me-2" id="btnLimpar">
+                                            <i class="bi bi-eraser me-2"></i>Limpar
+                                        </button>
+                                        <button type="submit" form="formCadastroFuncionario" class="btn btn-primary rounded-pill px-4" id="btnSalvarFuncionario">
+                                            <i class="bi bi-check-circle me-2"></i>Salvar Cadastro
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card text-white bg-success">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="bi bi-building me-2"></i> Clientes</h5>
-                                <p class="card-text display-6">42</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card text-white bg-warning">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="bi bi-calendar2-check me-2"></i> Atendimentos</h5>
-                                <p class="card-text display-6">128</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card text-white bg-danger">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="bi bi-exclamation-triangle me-2"></i> Pendências</h5>
-                                <p class="card-text display-6">7</p>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
 
                 <!-- Conteúdo principal -->
-                <!-- <div class="card">
-                    <div class="card-header">
-                        <i class="bi bi-activity me-1"></i> Atividade Recente
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-people-fill me-1"></i> Lista de Funcionários
+                        </div>
+                        <div>
+                            <div class="input-group">
+                                <input type="text" id="pesquisaFuncionario" class="form-control form-control-sm" placeholder="Pesquisar funcionário...">
+                                <button class="btn btn-sm btn-outline-primary" type="button" id="btnPesquisar">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
-                        
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped" id="tabelaFuncionarios">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>Função</th>
+                                        <th>Telefone</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="6" class="text-center">Carregando funcionários...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="paginacao" class="d-flex justify-content-between align-items-center mt-3">
+                            <div>
+                                <span id="totalRegistros">0</span> registros encontrados
+                            </div>
+                            <nav aria-label="Paginação">
+                                <ul class="pagination pagination-sm" id="paginacaoLinks">
+                                    <!-- Links de paginação serão inseridos aqui via JavaScript -->
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-                </div> -->
+                </div>
             </main>
         </div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/funcionarios.js"></script>
 </body>
 
 </html>
