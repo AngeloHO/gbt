@@ -33,7 +33,8 @@ $user = $_SESSION['user'];
     <style>
         .sidebar {
             min-height: 100vh;
-            background-color: #212529;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            border-radius: 0 20px 20px 0;
         }
 
         .sidebar-link {
@@ -42,13 +43,17 @@ $user = $_SESSION['user'];
             text-decoration: none;
             display: block;
             border-left: 3px solid transparent;
+            border-radius: 10px;
+            margin: 5px 10px;
+            transition: all 0.3s ease;
         }
 
         .sidebar-link:hover,
         .sidebar-link.active {
-            background-color: #2c3237;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-left-color: #0d6efd;
+            border-left-color: #667eea;
+            transform: translateX(10px);
         }
 
         .sidebar-link i {
@@ -70,13 +75,178 @@ $user = $_SESSION['user'];
             font-size: 18px;
             font-weight: 700;
             letter-spacing: 2px;
-            color: #fff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .logo-subtitle {
             font-size: 10px;
             letter-spacing: 1px;
             color: #adb5bd;
+        }
+
+        /* Melhorias visuais elegantes */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn {
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            border: none;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            border: none;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
+            border: none;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            border: none;
+        }
+
+        .table {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-dark {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            border-radius: 20px 20px 0 0;
+            border-bottom: none;
+            padding: 25px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .nav-tabs .nav-link {
+            border-radius: 15px 15px 0 0;
+            border: none;
+            margin-right: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .badge {
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .alert {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cards de estatísticas */
+        .stats-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 5px solid #667eea;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stats-card.success {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(68, 160, 141, 0.1) 100%);
+            border-left-color: #44a08d;
+        }
+
+        .stats-card.info {
+            background: linear-gradient(135deg, rgba(137, 247, 254, 0.1) 0%, rgba(102, 166, 255, 0.1) 100%);
+            border-left-color: #66a6ff;
+        }
+
+        .stats-card.warning {
+            background: linear-gradient(135deg, rgba(253, 187, 45, 0.1) 0%, rgba(34, 193, 195, 0.1) 100%);
+            border-left-color: #fdbb2d;
+        }
+
+        /* Animações suaves */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Inputs com maiúsculo automático */
+        .text-uppercase-input {
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -130,8 +300,13 @@ $user = $_SESSION['user'];
 
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Funcionários</h1>
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
+                    <div>
+                        <h1 class="h2 mb-0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            <i class="bi bi-people-fill me-2"></i>Gestão de Funcionários
+                        </h1>
+                        <p class="text-muted small mb-0">Controle completo dos colaboradores da empresa</p>
+                    </div>
                     <div class="dropdown">
                         <a href="#" class="d-block text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle me-1"></i> <?php echo htmlspecialchars($user['nome'] ?? 'Usuário'); ?>
@@ -147,12 +322,86 @@ $user = $_SESSION['user'];
                     </div>
                 </div>
 
+                <!-- Cards de estatísticas -->
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-left: 5px solid #667eea !important;">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="p-3 rounded-circle" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                        <i class="bi bi-people text-white fs-4"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <div class="small text-muted fw-semibold">Total de Funcionários</div>
+                                    <div class="h4 mb-0 fw-bold counter" id="totalFuncionarios">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(68, 160, 141, 0.1) 100%); border-left: 5px solid #44a08d !important;">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="p-3 rounded-circle" style="background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);">
+                                        <i class="bi bi-person-check text-white fs-4"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <div class="small text-muted fw-semibold">Funcionários Ativos</div>
+                                    <div class="h4 mb-0 fw-bold counter" id="funcionariosAtivos">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 133, 27, 0.1) 100%); border-left: 5px solid #fd7e14 !important;">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="p-3 rounded-circle" style="background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);">
+                                        <i class="bi bi-person-dash text-white fs-4"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <div class="small text-muted fw-semibold">Funcionários Inativos</div>
+                                    <div class="h4 mb-0 fw-bold counter" id="funcionariosInativos">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, rgba(137, 247, 254, 0.1) 0%, rgba(102, 166, 255, 0.1) 100%); border-left: 5px solid #66a6ff !important;">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="p-3 rounded-circle" style="background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);">
+                                        <i class="bi bi-calendar-plus text-white fs-4"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <div class="small text-muted fw-semibold">Admissões Este Mês</div>
+                                    <div class="h4 mb-0 fw-bold counter" id="admissoesEMes">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h5 mb-0">Lista de Funcionários</h3>
+                            <button type="button" id="btnCadastrarFuncionario" class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#cadastroFuncionarioModal" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 10px; padding: 10px 20px;">
+                                <i class="bi bi-person-plus me-2"></i>Cadastrar Funcionário
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-6 col-lg-3 mb-4">
-                        <button type="button" id="btnCadastrarFuncionario" class="btn btn-primary rounded-pill shadow-sm" data-bs-toggle="modal" data-bs-target="#cadastroFuncionarioModal">
-                            <i class="bi bi-person-plus me-2"></i>Cadastrar Funcionário
-                        </button>
                     </div>
                     <div class="modal fade" id="cadastroFuncionarioModal" tabindex="-1" aria-labelledby="cadastroFuncionarioModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -724,6 +973,199 @@ $user = $_SESSION['user'];
                 });
 
             }, 500);
+        });
+    </script>
+
+    <!-- Script para conversão automática para maiúsculas e melhorias visuais -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Aplicar conversão automática para maiúsculas em campos de texto específicos
+            const textInputs = document.querySelectorAll('input[type="text"]:not([id="cpf"]):not([id="cep"]):not([id="telefone"]):not([id="telefoneEmergencia"]):not([id="dataAdmissao"]):not([id="dataNascimento"]):not([id="email"])');
+            
+            textInputs.forEach(input => {
+                // Adicionar classes para maiúsculo
+                input.classList.add('text-uppercase-input');
+                input.style.textTransform = 'uppercase';
+                
+                // Adicionar evento de input para conversão
+                input.addEventListener('input', function() {
+                    this.value = this.value.toUpperCase();
+                });
+            });
+
+            // Adicionar animações aos cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+            });
+
+            // Adicionar efeitos visuais aos botões
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Melhorar feedback visual nos formulários
+            const formControls = document.querySelectorAll('.form-control, .form-select');
+            formControls.forEach(control => {
+                control.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                    this.parentElement.style.transition = 'all 0.3s ease';
+                });
+                
+                control.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+            });
+
+            // Adicionar contador animado para estatísticas (se existirem)
+            function animateCounter(element, target) {
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 30);
+            }
+
+            // Aplicar contador animado se houver elementos com classe 'counter'
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                if (!isNaN(target)) {
+                    counter.textContent = '0';
+                    animateCounter(counter, target);
+                }
+            });
+
+            console.log('Scripts de melhorias visuais carregados com sucesso');
+        });
+
+        // Função para aplicar maiúsculo em tempo real em qualquer campo
+        function applyUppercase(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.style.textTransform = 'uppercase';
+                field.addEventListener('input', function() {
+                    this.value = this.value.toUpperCase();
+                });
+            }
+        }
+
+        // Função para validar campos obrigatórios com feedback visual
+        function validateRequiredFields() {
+            const requiredFields = document.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    field.style.borderColor = '#dc3545';
+                    field.style.boxShadow = '0 0 0 0.2rem rgba(220, 53, 69, 0.25)';
+                    isValid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                    field.classList.add('is-valid');
+                    field.style.borderColor = '#28a745';
+                    field.style.boxShadow = '0 0 0 0.2rem rgba(40, 167, 69, 0.25)';
+                }
+            });
+
+            return isValid;
+        }
+
+        // Aplicar validação em tempo real
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('formCadastroFuncionario');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    if (!validateRequiredFields()) {
+                        e.preventDefault();
+                        // Adicionar shake animation ao modal
+                        const modal = document.querySelector('.modal-content');
+                        if (modal) {
+                            modal.style.animation = 'shake 0.5s ease-in-out';
+                            setTimeout(() => {
+                                modal.style.animation = '';
+                            }, 500);
+                        }
+                    }
+                });
+            }
+        });
+
+        // Adicionar keyframe para animação shake
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Carregar estatísticas dos funcionários
+        function carregarEstatisticas() {
+            fetch('listar_funcionarios.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.funcionarios) {
+                        const funcionarios = data.funcionarios;
+                        const total = funcionarios.length;
+                        const ativos = funcionarios.filter(f => f.status === 'ativo').length;
+                        const inativos = funcionarios.filter(f => f.status === 'inativo').length;
+                        
+                        // Calcular admissões deste mês
+                        const hoje = new Date();
+                        const mesAtual = hoje.getMonth();
+                        const anoAtual = hoje.getFullYear();
+                        
+                        const admissoesEMes = funcionarios.filter(f => {
+                            if (f.data_admissao) {
+                                const dataAdmissao = new Date(f.data_admissao);
+                                return dataAdmissao.getMonth() === mesAtual && dataAdmissao.getFullYear() === anoAtual;
+                            }
+                            return false;
+                        }).length;
+
+                        // Atualizar contadores com animação
+                        setTimeout(() => {
+                            animateCounter(document.getElementById('totalFuncionarios'), total);
+                        }, 100);
+                        
+                        setTimeout(() => {
+                            animateCounter(document.getElementById('funcionariosAtivos'), ativos);
+                        }, 200);
+                        
+                        setTimeout(() => {
+                            animateCounter(document.getElementById('funcionariosInativos'), inativos);
+                        }, 300);
+                        
+                        setTimeout(() => {
+                            animateCounter(document.getElementById('admissoesEMes'), admissoesEMes);
+                        }, 400);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar estatísticas:', error);
+                });
+        }
+
+        // Carregar estatísticas quando a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarEstatisticas();
         });
     </script>
 </body>

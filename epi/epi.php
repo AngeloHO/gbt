@@ -74,6 +74,213 @@ $user = $_SESSION['user'];
             letter-spacing: 1px;
             color: #adb5bd;
         }
+
+        .border-left-primary {
+            border-left: 0.25rem solid #007bff !important;
+        }
+
+        .border-left-success {
+            border-left: 0.25rem solid #28a745 !important;
+        }
+
+        .border-left-warning {
+            border-left: 0.25rem solid #ffc107 !important;
+        }
+
+        .border-left-info {
+            border-left: 0.25rem solid #17a2b8 !important;
+        }
+
+        .text-xs {
+            font-size: 0.7rem;
+        }
+
+        .fa-2x {
+            font-size: 2em;
+        }
+
+        .text-gray-300 {
+            color: #dddfeb !important;
+        }
+
+        .text-gray-800 {
+            color: #5a5c69 !important;
+        }
+
+        .estoque-baixo {
+            background-color: #f8d7da !important;
+        }
+
+        .estoque-ok {
+            background-color: #d4edda !important;
+        }
+
+        /* Melhorias visuais elegantes */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn {
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            border: none;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            border: none;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
+            border: none;
+        }
+
+        .table {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-dark {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            border-radius: 20px 20px 0 0;
+            border-bottom: none;
+            padding: 25px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .nav-tabs .nav-link {
+            border-radius: 15px 15px 0 0;
+            border: none;
+            margin-right: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .badge {
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .border-left-primary {
+            border-left: 5px solid #667eea !important;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        .border-left-success {
+            border-left: 5px solid #44a08d !important;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(68, 160, 141, 0.1) 100%);
+        }
+
+        .border-left-info {
+            border-left: 5px solid #66a6ff !important;
+            background: linear-gradient(135deg, rgba(137, 247, 254, 0.1) 0%, rgba(102, 166, 255, 0.1) 100%);
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            border-radius: 0 20px 20px 0;
+        }
+
+        .sidebar-link {
+            border-radius: 10px;
+            margin: 5px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: translateX(10px);
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .alert {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animações suaves */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Efeito glass morphism */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
     </style>
 </head>
 
@@ -126,41 +333,717 @@ $user = $_SESSION['user'];
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">EPI</h1>
-                    <div class="dropdown">
-                        <a href="#" class="d-block text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle me-1"></i> <?php echo htmlspecialchars($user['nome'] ?? 'Usuário'); ?>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-1"></i> Perfil</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-1"></i> Configurações</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="logout.php"><i class="bi bi-box-arrow-right me-1"></i> Sair</a></li>
-                        </ul>
+                    <h1 class="h2">
+                        <i class="bi bi-shield-check me-2"></i>Gestão de EPI
+                    </h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-3">
+                            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#cadastroEpiModal">
+                                <i class="bi bi-plus-circle me-2"></i>Novo EPI
+                            </button>
+                            <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#entregaEpiModal">
+                                <i class="bi bi-box-arrow-right me-2"></i>Nova Entrega
+                            </button>
+                        </div>
+                        <div class="dropdown">
+                            <a href="#" class="d-block text-decoration-none dropdown-toggle btn btn-outline-secondary" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle me-2"></i><?php echo htmlspecialchars($user['nome'] ?? 'Usuário'); ?>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser" style="border-radius: 15px; border: none;">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Perfil</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Configurações</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="../logout.php"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- Cards de resumo -->
+                <div class="row mb-4">
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-3">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-2">
+                                            <i class="bi bi-shield-check me-2"></i>Total de EPIs
+                                        </div>
+                                        <div class="h4 mb-0 font-weight-bold text-gray-800" id="totalEpis">
+                                            <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                                <span class="visually-hidden">Carregando...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-shield-check" style="font-size: 3rem; color: #667eea; opacity: 0.3;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-3">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-2">
+                                            <i class="bi bi-calendar-check me-2"></i>Entregas Este Mês
+                                        </div>
+                                        <div class="h4 mb-0 font-weight-bold text-gray-800" id="entregasMes">
+                                            <div class="spinner-border spinner-border-sm text-success" role="status">
+                                                <span class="visually-hidden">Carregando...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-box-arrow-right" style="font-size: 3rem; color: #44a08d; opacity: 0.3;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-3">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-2">
+                                            <i class="bi bi-check-circle me-2"></i>EPIs Ativos
+                                        </div>
+                                        <div class="h4 mb-0 font-weight-bold text-gray-800" id="episAtivos">
+                                            <div class="spinner-border spinner-border-sm text-info" role="status">
+                                                <span class="visually-hidden">Carregando...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-check-circle" style="font-size: 3rem; color: #66a6ff; opacity: 0.3;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Conteúdo principal -->
+                <!-- Abas de navegação -->
                 <div class="card">
                     <div class="card-header">
-
+                        <ul class="nav nav-tabs card-header-tabs" id="epiTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="equipamentos-tab" data-bs-toggle="tab" data-bs-target="#equipamentos" type="button" role="tab">
+                                    <i class="bi bi-shield-check me-1"></i>Equipamentos
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="entregas-tab" data-bs-toggle="tab" data-bs-target="#entregas" type="button" role="tab">
+                                    <i class="bi bi-box-arrow-right me-1"></i>Entregas
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="relatorios-tab" data-bs-toggle="tab" data-bs-target="#relatorios" type="button" role="tab">
+                                    <i class="bi bi-file-earmark-text me-1"></i>Relatórios
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                     <div class="card-body">
+                        <div class="tab-content" id="epiTabContent">
+                            <!-- Aba Equipamentos -->
+                            <div class="tab-pane fade show active" id="equipamentos" role="tabpanel">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5>Lista de Equipamentos</h5>
+                                    <div class="d-flex gap-2">
+                                        <input type="text" class="form-control" id="filtroEquipamentos" placeholder="Buscar equipamentos...">
+                                        <select class="form-select" id="filtroCategoria">
+                                            <option value="">Todas as categorias</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover" id="tabelaEquipamentos">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nome</th>
+                                                <th>Categoria</th>
+                                                <th>Fabricante</th>
+                                                <th>Status</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Dados carregados via JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
+                            <!-- Aba Entregas -->
+                            <div class="tab-pane fade" id="entregas" role="tabpanel">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5>Histórico de Entregas</h5>
+                                    <div class="d-flex gap-2">
+                                        <input type="text" class="form-control" id="filtroEntregas" placeholder="Buscar entregas...">
+                                        <select class="form-select" id="filtroStatusEntrega">
+                                            <option value="">Todos os status</option>
+                                            <option value="entregue">Entregue</option>
+                                            <option value="devolvido">Devolvido</option>
+                                            <option value="perdido">Perdido</option>
+                                            <option value="danificado">Danificado</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover" id="tabelaEntregas">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Funcionário</th>
+                                                <th>EPI</th>
+                                                <th>Data Entrega</th>
+                                                <th>Status</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Dados carregados via JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Aba Relatórios -->
+                            <div class="tab-pane fade" id="relatorios" role="tabpanel">
+                                <h5>Relatórios</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Relatório de Entregas por Período</h6>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Data Inicial</label>
+                                                    <input type="date" class="form-control" id="dataInicialEntregas">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Data Final</label>
+                                                    <input type="date" class="form-control" id="dataFinalEntregas">
+                                                </div>
+                                                <button class="btn btn-primary" onclick="gerarRelatorioEntregas()">
+                                                    <i class="bi bi-file-earmark-pdf me-1"></i>Gerar Relatório
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Relatório de EPIs por Funcionário</h6>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Funcionário</label>
+                                                    <select class="form-select" id="funcionarioRelatorio">
+                                                        <option value="">Todos os funcionários</option>
+                                                    </select>
+                                                </div>
+                                                <button class="btn btn-success" onclick="gerarRelatorioFuncionario()">
+                                                    <i class="bi bi-file-earmark-excel me-1"></i>Gerar Relatório
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
         </div>
     </div>
 
+    <!-- Modal Cadastro de EPI -->
+    <div class="modal fade" id="cadastroEpiModal" tabindex="-1" aria-labelledby="cadastroEpiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="cadastroEpiModalLabel">Cadastrar Novo EPI</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <form id="formCadastroEpi">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label for="epiNome" class="form-label">Nome do EPI *</label>
+                                <input type="text" class="form-control" id="epiNome" name="nome" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="epiCategoria" class="form-label">Categoria *</label>
+                                <select class="form-select" id="epiCategoria" name="categoria" required>
+                                    <option value="">Selecione uma categoria</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="epiDescricao" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="epiDescricao" name="descricao" rows="3" placeholder="Descrição detalhada do equipamento"></textarea>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="epiFabricante" class="form-label">Fabricante</label>
+                                <input type="text" class="form-control" id="epiFabricante" name="fabricante">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="epiTamanho" class="form-label">Tamanho</label>
+                                <input type="text" class="form-control" id="epiTamanho" name="tamanho" placeholder="P, M, G, XG, Único">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="epiObservacoes" class="form-label">Observações</label>
+                            <textarea class="form-control" id="epiObservacoes" name="observacoes" rows="2" placeholder="Informações adicionais sobre o EPI"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar EPI</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Entrega de EPI -->
+    <div class="modal fade" id="entregaEpiModal" tabindex="-1" aria-labelledby="entregaEpiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="entregaEpiModalLabel">Nova Entrega de EPI</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <form id="formEntregaEpi">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="entregaFuncionario" class="form-label">Funcionário *</label>
+                                <select class="form-select" id="entregaFuncionario" name="funcionario_id" required>
+                                    <option value="">Selecione um funcionário</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="entregaEpi" class="form-label">EPI *</label>
+                                <select class="form-select" id="entregaEpi" name="epi_id" required>
+                                    <option value="">Selecione um EPI</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="entregaDataEntrega" class="form-label">Data da Entrega *</label>
+                                <input type="date" class="form-control" id="entregaDataEntrega" name="data_entrega" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="entregaDataPrevista" class="form-label">Previsão de Devolução</label>
+                                <input type="date" class="form-control" id="entregaDataPrevista" name="data_prevista">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="entregaMotivo" class="form-label">Motivo da Entrega</label>
+                            <textarea class="form-control" id="entregaMotivo" name="motivo" rows="2" placeholder="Ex: Novo funcionário, reposição, etc."></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="entregaObservacoes" class="form-label">Observações</label>
+                            <textarea class="form-control" id="entregaObservacoes" name="observacoes" rows="2" placeholder="Informações adicionais sobre a entrega"></textarea>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="entregaAssinatura" name="assinatura" value="1">
+                            <label class="form-check-label" for="entregaAssinatura">
+                                Funcionário assinou o recebimento
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Registrar Entrega</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Carregar dados quando a página estiver pronta
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarDashboard();
+            carregarCategorias();
+            carregarFuncionarios();
+            carregarEquipamentos();
+            carregarEntregas();
+            
+            // Definir data de hoje como padrão
+            document.getElementById('entregaDataEntrega').value = new Date().toISOString().split('T')[0];
+            
+            // Carregar funcionários no select de relatórios
+            carregarFuncionariosRelatorio();
+
+            // Converter para maiúsculo automaticamente em todos os campos de texto
+            const campos = document.querySelectorAll('input[type="text"], textarea');
+            campos.forEach(campo => {
+                campo.addEventListener('input', function() {
+                    this.value = this.value.toUpperCase();
+                });
+            });
+        });
+
+        // Função para carregar dados do dashboard
+        function carregarDashboard() {
+            fetch('dashboard_epi.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        document.getElementById('totalEpis').innerHTML = `<span class="counter">${data.data.total_epis || 0}</span>`;
+                        document.getElementById('entregasMes').innerHTML = `<span class="counter">${data.data.entregas_mes || 0}</span>`;
+                        document.getElementById('episAtivos').innerHTML = `<span class="counter">${data.data.epis_ativos || 0}</span>`;
+                        
+                        // Animar os números
+                        animateCounters();
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar dashboard:', error);
+                    document.getElementById('totalEpis').textContent = '0';
+                    document.getElementById('entregasMes').textContent = '0';
+                    document.getElementById('episAtivos').textContent = '0';
+                });
+        }
+
+        // Função para animar contadores
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                let current = 0;
+                const increment = target / 20;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 50);
+            });
+        }
+
+        // Função para carregar categorias
+        function carregarCategorias() {
+            fetch('listar_categorias.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const selectCategoria = document.getElementById('epiCategoria');
+                        const filtroCategoria = document.getElementById('filtroCategoria');
+                        
+                        selectCategoria.innerHTML = '<option value="">Selecione uma categoria</option>';
+                        filtroCategoria.innerHTML = '<option value="">Todas as categorias</option>';
+                        
+                        data.data.forEach(categoria => {
+                            selectCategoria.innerHTML += `<option value="${categoria.categoria_nome}">${categoria.categoria_nome}</option>`;
+                            filtroCategoria.innerHTML += `<option value="${categoria.categoria_nome}">${categoria.categoria_nome}</option>`;
+                        });
+                    }
+                })
+                .catch(error => console.error('Erro ao carregar categorias:', error));
+        }
+
+        // Função para carregar funcionários
+        function carregarFuncionarios() {
+            fetch('../funcionarios/listar_funcionarios.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const selectFuncionario = document.getElementById('entregaFuncionario');
+                        selectFuncionario.innerHTML = '<option value="">Selecione um funcionário</option>';
+                        
+                        data.funcionarios.forEach(funcionario => {
+                            if (funcionario.status === 'ativo') {
+                                selectFuncionario.innerHTML += `<option value="${funcionario.id}">${funcionario.nome}</option>`;
+                            }
+                        });
+                    }
+                })
+                .catch(error => console.error('Erro ao carregar funcionários:', error));
+        }
+
+        // Função para carregar equipamentos
+        function carregarEquipamentos() {
+            fetch('listar_equipamentos.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const tbody = document.querySelector('#tabelaEquipamentos tbody');
+                        const selectEpi = document.getElementById('entregaEpi');
+                        
+                        tbody.innerHTML = '';
+                        selectEpi.innerHTML = '<option value="">Selecione um EPI</option>';
+                        
+                        data.data.forEach(epi => {
+                            const statusBadge = epi.status === 'ativo' ? 
+                                '<span class="badge bg-success">Ativo</span>' : 
+                                '<span class="badge bg-danger">Inativo</span>';
+                            
+                            tbody.innerHTML += `
+                                <tr>
+                                    <td>${epi.id}</td>
+                                    <td>${epi.nome}</td>
+                                    <td>${epi.categoria}</td>
+                                    <td>${epi.fabricante || '-'}</td>
+                                    <td>${statusBadge}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" onclick="visualizarEpi(${epi.id})">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-warning" onclick="editarEpi(${epi.id})">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            `;
+                            
+                            // Adicionar ao select de entregas apenas EPIs ativos
+                            if (epi.status === 'ativo') {
+                                selectEpi.innerHTML += `<option value="${epi.id}">${epi.nome}</option>`;
+                            }
+                        });
+                    }
+                })
+                .catch(error => console.error('Erro ao carregar equipamentos:', error));
+        }
+
+        // Função para carregar entregas
+        function carregarEntregas() {
+            fetch('listar_entregas.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const tbody = document.querySelector('#tabelaEntregas tbody');
+                        tbody.innerHTML = '';
+                        
+                        data.data.forEach(entrega => {
+                            let statusBadge;
+                            switch(entrega.status) {
+                                case 'entregue':
+                                    statusBadge = '<span class="badge bg-primary">Entregue</span>';
+                                    break;
+                                case 'devolvido':
+                                    statusBadge = '<span class="badge bg-success">Devolvido</span>';
+                                    break;
+                                case 'perdido':
+                                    statusBadge = '<span class="badge bg-warning">Perdido</span>';
+                                    break;
+                                case 'danificado':
+                                    statusBadge = '<span class="badge bg-danger">Danificado</span>';
+                                    break;
+                                default:
+                                    statusBadge = '<span class="badge bg-secondary">' + entrega.status + '</span>';
+                            }
+                            
+                            tbody.innerHTML += `
+                                <tr>
+                                    <td>${entrega.id}</td>
+                                    <td>${entrega.funcionario_nome}</td>
+                                    <td>${entrega.epi_nome}</td>
+                                    <td>${new Date(entrega.data_entrega).toLocaleDateString('pt-BR')}</td>
+                                    <td>${statusBadge}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" onclick="visualizarEntrega(${entrega.id})">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        ${entrega.status === 'entregue' ? 
+                                            `<button class="btn btn-sm btn-success" onclick="marcarDevolucao(${entrega.id})">
+                                                <i class="bi bi-box-arrow-in-left"></i>
+                                            </button>` : ''
+                                        }
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                    }
+                })
+                .catch(error => console.error('Erro ao carregar entregas:', error));
+        }
+
+        // Função para cadastrar EPI
+        document.getElementById('formCadastroEpi').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('cadastrar_epi.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    bootstrap.Modal.getInstance(document.getElementById('cadastroEpiModal')).hide();
+                    showNotification('success', data.message);
+                    this.reset();
+                    carregarEquipamentos();
+                    carregarDashboard();
+                } else {
+                    showNotification('error', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                showNotification('error', 'Erro ao cadastrar EPI');
+            });
+        });
+
+        // Função para registrar entrega
+        document.getElementById('formEntregaEpi').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('registrar_entrega.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    bootstrap.Modal.getInstance(document.getElementById('entregaEpiModal')).hide();
+                    showNotification('success', data.message);
+                    this.reset();
+                    document.getElementById('entregaDataEntrega').value = new Date().toISOString().split('T')[0];
+                    carregarEntregas();
+                    carregarDashboard();
+                } else {
+                    showNotification('error', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                showNotification('error', 'Erro ao registrar entrega');
+            });
+        });
+
+        // Função para mostrar notificações
+        function showNotification(type, message) {
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.parentNode.removeChild(alertDiv);
+                }
+            }, 5000);
+        }
+
+        // Outras funções (placeholder para implementação futura)
+        function visualizarEpi(id) {
+            console.log('Visualizar EPI:', id);
+        }
+
+        function editarEpi(id) {
+            console.log('Editar EPI:', id);
+        }
+
+        function visualizarEntrega(id) {
+            console.log('Visualizar entrega:', id);
+        }
+
+        function marcarDevolucao(id) {
+            if (confirm('Confirma a devolução deste EPI?')) {
+                fetch('marcar_devolucao.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ entrega_id: id })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showNotification('success', data.message);
+                        carregarEntregas();
+                        carregarEquipamentos();
+                        carregarDashboard();
+                    } else {
+                        showNotification('error', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    showNotification('error', 'Erro ao marcar devolução');
+                });
+            }
+        }
+
+        function gerarRelatorioEntregas() {
+            const dataInicial = document.getElementById('dataInicialEntregas').value;
+            const dataFinal = document.getElementById('dataFinalEntregas').value;
+            
+            if (!dataInicial || !dataFinal) {
+                showNotification('error', 'Informe as datas inicial e final');
+                return;
+            }
+            
+            window.open(`relatorio_entregas.php?data_inicial=${dataInicial}&data_final=${dataFinal}`, '_blank');
+        }
+
+        // Função para carregar funcionários no relatório
+        function carregarFuncionariosRelatorio() {
+            fetch('../funcionarios/listar_funcionarios.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const selectFuncionario = document.getElementById('funcionarioRelatorio');
+                        selectFuncionario.innerHTML = '<option value="">Todos os funcionários</option>';
+                        
+                        data.funcionarios.forEach(funcionario => {
+                            selectFuncionario.innerHTML += `<option value="${funcionario.id}">${funcionario.nome}</option>`;
+                        });
+                    }
+                })
+                .catch(error => console.error('Erro ao carregar funcionários:', error));
+        }
+
+        function gerarRelatorioFuncionario() {
+            const funcionario = document.getElementById('funcionarioRelatorio').value;
+            const params = funcionario ? `?funcionario_id=${funcionario}` : '';
+            window.open(`relatorio_funcionario.php${params}`, '_blank');
+        }
+
+        function gerarRelatorioEstoque() {
+            // Remover função de relatório de estoque
+            showNotification('info', 'Relatório de estoque não disponível nesta versão');
+        }
+    </script>
 </body>
 
 </html>
