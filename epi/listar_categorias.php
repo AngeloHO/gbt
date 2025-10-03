@@ -14,7 +14,7 @@ $conn = connect_local_mysqli('gebert');
 
 try {
     // Buscar todas as categorias ativas
-    $sql = "SELECT categoria_id, categoria_nome, categoria_descricao 
+    $sql = "SELECT categoria_id as id, categoria_nome as nome, categoria_descricao as descricao 
             FROM EPI_CATEGORIAS 
             WHERE categoria_status = 'ativo' 
             ORDER BY categoria_nome";

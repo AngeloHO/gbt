@@ -679,6 +679,240 @@ $user = $_SESSION['user'];
         </div>
     </div>
 
+    <!-- Modal Visualizar EPI -->
+    <div class="modal fade" id="visualizarEpiModal" tabindex="-1" aria-labelledby="visualizarEpiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-dark">
+                    <h5 class="modal-title" id="visualizarEpiModalLabel">
+                        <i class="bi bi-eye me-2"></i>Detalhes do EPI
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <label class="form-label fw-bold text-dark">
+                                <i class="bi bi-shield-check me-1"></i>Nome do EPI:
+                            </label>
+                            <p id="visualizar-nome" class="border rounded p-2 bg-light mb-0"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-tags me-1"></i>Categoria:
+                                </label>
+                                <p id="visualizar-categoria" class="border rounded p-2 bg-light mb-0"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-building me-1"></i>Fabricante:
+                                </label>
+                                <p id="visualizar-fabricante" class="border rounded p-2 bg-light mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-rulers me-1"></i>Tamanho:
+                                </label>
+                                <p id="visualizar-tamanho" class="border rounded p-2 bg-light mb-0"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-activity me-1"></i>Status:
+                                </label>
+                                <p id="visualizar-status" class="border rounded p-2 bg-light mb-0">
+                                    <span id="status-badge"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-file-text me-1"></i>Descrição:
+                                </label>
+                                <div id="visualizar-descricao" class="border rounded p-3 bg-light" style="min-height: 80px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-1"></i>Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar EPI -->
+    <div class="modal fade" id="editarEpiModal" tabindex="-1" aria-labelledby="editarEpiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title" id="editarEpiModalLabel">
+                        <i class="bi bi-pencil me-2"></i>Editar EPI
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <form id="formEditarEpi">
+                    <input type="hidden" id="editar-id" name="id">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label for="editar-nome" class="form-label">
+                                    <i class="bi bi-shield-check me-1"></i>Nome do EPI *
+                                </label>
+                                <input type="text" class="form-control" id="editar-nome" name="nome" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="editar-categoria" class="form-label">
+                                        <i class="bi bi-tags me-1"></i>Categoria *
+                                    </label>
+                                    <select class="form-select" id="editar-categoria" name="categoria_id" required>
+                                        <option value="">Selecione uma categoria</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editar-fabricante" class="form-label">
+                                        <i class="bi bi-building me-1"></i>Fabricante *
+                                    </label>
+                                    <input type="text" class="form-control" id="editar-fabricante" name="fabricante" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="editar-tamanho" class="form-label">
+                                        <i class="bi bi-rulers me-1"></i>Tamanho
+                                    </label>
+                                    <input type="text" class="form-control" id="editar-tamanho" name="tamanho">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editar-status" class="form-label">
+                                        <i class="bi bi-activity me-1"></i>Status *
+                                    </label>
+                                    <select class="form-select" id="editar-status" name="status" required>
+                                        <option value="ATIVO">ATIVO</option>
+                                        <option value="INATIVO">INATIVO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="editar-descricao" class="form-label">
+                                        <i class="bi bi-file-text me-1"></i>Descrição
+                                    </label>
+                                    <textarea class="form-control" id="editar-descricao" name="descricao" rows="3" placeholder="Descreva o EPI..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle me-1"></i>Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-warning">
+                            <i class="bi bi-check-circle me-1"></i>Atualizar EPI
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Visualizar Entrega -->
+    <div class="modal fade" id="visualizarEntregaModal" tabindex="-1" aria-labelledby="visualizarEntregaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="visualizarEntregaModalLabel">
+                        <i class="bi bi-clipboard-check me-2"></i>Detalhes da Entrega
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-person me-1"></i>Funcionário:
+                                </label>
+                                <p id="entrega-funcionario" class="border rounded p-2 bg-light mb-0"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-shield-check me-1"></i>EPI:
+                                </label>
+                                <p id="entrega-epi" class="border rounded p-2 bg-light mb-0"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-calendar me-1"></i>Data da Entrega:
+                                </label>
+                                <p id="entrega-data" class="border rounded p-2 bg-light mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-calendar-event me-1"></i>Previsão de Devolução:
+                                </label>
+                                <p id="entrega-previsao" class="border rounded p-2 bg-light mb-0"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-activity me-1"></i>Status:
+                                </label>
+                                <p id="entrega-status" class="border rounded p-2 bg-light mb-0">
+                                    <span id="entrega-status-badge"></span>
+                                </p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-check-circle me-1"></i>Assinatura:
+                                </label>
+                                <p id="entrega-assinatura" class="border rounded p-2 bg-light mb-0"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-info-circle me-1"></i>Motivo da Entrega:
+                                </label>
+                                <div id="entrega-motivo" class="border rounded p-3 bg-light" style="min-height: 60px;"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-dark">
+                                    <i class="bi bi-file-text me-1"></i>Observações:
+                                </label>
+                                <div id="entrega-observacoes" class="border rounded p-3 bg-light" style="min-height: 60px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-1"></i>Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -749,9 +983,14 @@ $user = $_SESSION['user'];
 
         // Função para carregar categorias
         function carregarCategorias() {
+            console.log('Carregando categorias...');
             fetch('listar_categorias.php')
-                .then(response => response.json())
+                .then(response => {
+                    console.log('Response categorias:', response.status);
+                    return response.json();
+                })
                 .then(data => {
+                    console.log('Dados categorias:', data);
                     if (data.status === 'success') {
                         const selectCategoria = document.getElementById('epiCategoria');
                         const filtroCategoria = document.getElementById('filtroCategoria');
@@ -760,9 +999,12 @@ $user = $_SESSION['user'];
                         filtroCategoria.innerHTML = '<option value="">Todas as categorias</option>';
                         
                         data.data.forEach(categoria => {
-                            selectCategoria.innerHTML += `<option value="${categoria.categoria_nome}">${categoria.categoria_nome}</option>`;
-                            filtroCategoria.innerHTML += `<option value="${categoria.categoria_nome}">${categoria.categoria_nome}</option>`;
+                            selectCategoria.innerHTML += `<option value="${categoria.id}">${categoria.nome}</option>`;
+                            filtroCategoria.innerHTML += `<option value="${categoria.nome}">${categoria.nome}</option>`;
                         });
+                        console.log('Categorias carregadas com sucesso');
+                    } else {
+                        console.error('Erro ao carregar categorias:', data.message);
                     }
                 })
                 .catch(error => console.error('Erro ao carregar categorias:', error));
@@ -942,6 +1184,34 @@ $user = $_SESSION['user'];
             });
         });
 
+        // Handler para o formulário de edição de EPI
+        document.getElementById('formEditarEpi').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('atualizar_epi.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    bootstrap.Modal.getInstance(document.getElementById('editarEpiModal')).hide();
+                    showNotification('success', data.message);
+                    this.reset();
+                    carregarEquipamentos();
+                    carregarDashboard();
+                } else {
+                    showNotification('error', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                showNotification('error', 'Erro ao atualizar EPI');
+            });
+        });
+
         // Função para mostrar notificações
         function showNotification(type, message) {
             const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
@@ -964,17 +1234,197 @@ $user = $_SESSION['user'];
             }, 5000);
         }
 
-        // Outras funções (placeholder para implementação futura)
+        // Função para visualizar EPI
         function visualizarEpi(id) {
-            console.log('Visualizar EPI:', id);
+            fetch(`listar_equipamentos.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success' && data.data.length > 0) {
+                        const epi = data.data[0];
+                        
+                        // Preencher os campos do modal
+                        document.getElementById('visualizar-nome').textContent = epi.nome || 'Não informado';
+                        document.getElementById('visualizar-categoria').textContent = epi.categoria || 'Não informado';
+                        document.getElementById('visualizar-fabricante').textContent = epi.fabricante || 'Não informado';
+                        document.getElementById('visualizar-tamanho').textContent = epi.tamanho || 'Não informado';
+                        document.getElementById('visualizar-descricao').textContent = epi.descricao || 'Nenhuma descrição disponível';
+                        
+                        // Configurar badge de status
+                        const statusBadge = document.getElementById('status-badge');
+                        const status = epi.status || 'INDEFINIDO';
+                        statusBadge.textContent = status;
+                        
+                        // Aplicar classes do badge baseado no status
+                        statusBadge.className = 'badge fs-6';
+                        if (status === 'ATIVO') {
+                            statusBadge.classList.add('bg-success');
+                        } else if (status === 'INATIVO') {
+                            statusBadge.classList.add('bg-danger');
+                        } else {
+                            statusBadge.classList.add('bg-secondary');
+                        }
+                        
+                        // Armazenar ID para possível edição
+                        document.getElementById('visualizarEpiModal').setAttribute('data-epi-id', id);
+                        
+                        // Exibir o modal
+                        new bootstrap.Modal(document.getElementById('visualizarEpiModal')).show();
+                    } else {
+                        showNotification('error', 'EPI não encontrado');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    showNotification('error', 'Erro ao carregar dados do EPI');
+                });
+        }
+
+        // Função para editar EPI a partir do modal de visualização
+        function editarEpiFromVisualizacao() {
+            const epiId = document.getElementById('visualizarEpiModal').getAttribute('data-epi-id');
+            if (epiId) {
+                // Fechar modal de visualização
+                bootstrap.Modal.getInstance(document.getElementById('visualizarEpiModal')).hide();
+                // Chamar função de edição (se existir)
+                if (typeof editarEpi === 'function') {
+                    editarEpi(epiId);
+                } else {
+                    showNotification('info', 'Função de edição ainda não implementada');
+                }
+            }
         }
 
         function editarEpi(id) {
-            console.log('Editar EPI:', id);
+            fetch(`listar_equipamentos.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success' && data.data.length > 0) {
+                        const epi = data.data[0];
+                        
+                        // Preencher os campos do formulário
+                        document.getElementById('editar-id').value = epi.id;
+                        document.getElementById('editar-nome').value = epi.nome || '';
+                        document.getElementById('editar-fabricante').value = epi.fabricante || '';
+                        document.getElementById('editar-tamanho').value = epi.tamanho || '';
+                        document.getElementById('editar-status').value = epi.status || 'ATIVO';
+                        document.getElementById('editar-descricao').value = epi.descricao || '';
+                        
+                        // Carregar categorias e selecionar a atual
+                        carregarCategoriasEdicao(epi.categoria_id);
+                        
+                        // Exibir o modal
+                        new bootstrap.Modal(document.getElementById('editarEpiModal')).show();
+                    } else {
+                        showNotification('error', 'EPI não encontrado');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    showNotification('error', 'Erro ao carregar dados do EPI');
+                });
+        }
+
+        // Função para carregar categorias no modal de edição
+        function carregarCategoriasEdicao(categoriaAtual = null) {
+            console.log('Carregando categorias para edição...');
+            fetch('listar_categorias.php')
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Dados recebidos:', data);
+                    if (data.status === 'success') {
+                        const select = document.getElementById('editar-categoria');
+                        if (!select) {
+                            console.error('Elemento editar-categoria não encontrado');
+                            return;
+                        }
+                        
+                        select.innerHTML = '<option value="">Selecione uma categoria</option>';
+                        
+                        if (data.data && data.data.length > 0) {
+                            data.data.forEach(categoria => {
+                                const option = document.createElement('option');
+                                option.value = categoria.id;
+                                option.textContent = categoria.nome;
+                                
+                                // Selecionar a categoria atual se fornecida
+                                if (categoriaAtual && categoria.id == categoriaAtual) {
+                                    option.selected = true;
+                                }
+                                
+                                select.appendChild(option);
+                            });
+                            console.log('Categorias carregadas com sucesso');
+                        } else {
+                            console.log('Nenhuma categoria encontrada');
+                        }
+                    } else {
+                        console.error('Erro no status:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar categorias:', error);
+                });
         }
 
         function visualizarEntrega(id) {
-            console.log('Visualizar entrega:', id);
+            console.log('Visualizando entrega:', id);
+            fetch(`listar_entregas.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Dados da entrega:', data);
+                    if (data.status === 'success' && data.data.length > 0) {
+                        const entrega = data.data[0];
+                        
+                        // Preencher os campos do modal
+                        document.getElementById('entrega-funcionario').textContent = entrega.funcionario_nome || 'Não informado';
+                        document.getElementById('entrega-epi').textContent = entrega.epi_nome || 'Não informado';
+                        
+                        // Formatar data da entrega
+                        const dataEntrega = entrega.data_entrega ? new Date(entrega.data_entrega).toLocaleDateString('pt-BR') : 'Não informado';
+                        document.getElementById('entrega-data').textContent = dataEntrega;
+                        
+                        // Formatar previsão de devolução
+                        const dataPrevisao = entrega.data_prevista ? new Date(entrega.data_prevista).toLocaleDateString('pt-BR') : 'Não informado';
+                        document.getElementById('entrega-previsao').textContent = dataPrevisao;
+                        
+                        // Configurar badge de status
+                        const statusBadge = document.getElementById('entrega-status-badge');
+                        const status = entrega.status || 'INDEFINIDO';
+                        statusBadge.textContent = status;
+                        
+                        // Aplicar classes do badge baseado no status
+                        statusBadge.className = 'badge fs-6';
+                        if (status === 'ENTREGUE' || status === 'ATIVO') {
+                            statusBadge.classList.add('bg-success');
+                        } else if (status === 'DEVOLVIDO') {
+                            statusBadge.classList.add('bg-info');
+                        } else if (status === 'VENCIDO') {
+                            statusBadge.classList.add('bg-danger');
+                        } else {
+                            statusBadge.classList.add('bg-secondary');
+                        }
+                        
+                        // Configurar assinatura
+                        const assinatura = entrega.assinatura == '1' ? 'Sim' : 'Não';
+                        document.getElementById('entrega-assinatura').textContent = assinatura;
+                        
+                        // Preencher campos de texto
+                        document.getElementById('entrega-motivo').textContent = entrega.motivo || 'Nenhum motivo informado';
+                        document.getElementById('entrega-observacoes').textContent = entrega.observacoes || 'Nenhuma observação';
+                        
+                        // Exibir o modal
+                        new bootstrap.Modal(document.getElementById('visualizarEntregaModal')).show();
+                    } else {
+                        showNotification('error', 'Entrega não encontrada');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    showNotification('error', 'Erro ao carregar dados da entrega');
+                });
         }
 
         function marcarDevolucao(id) {
@@ -1013,7 +1463,8 @@ $user = $_SESSION['user'];
                 return;
             }
             
-            window.open(`relatorio_entregas.php?data_inicial=${dataInicial}&data_final=${dataFinal}`, '_blank');
+            // Abrir o gerador de PDF diretamente
+            window.open(`gerar_pdf_entregas.php?data_inicial=${dataInicial}&data_final=${dataFinal}`, '_blank');
         }
 
         // Função para carregar funcionários no relatório
@@ -1036,7 +1487,7 @@ $user = $_SESSION['user'];
         function gerarRelatorioFuncionario() {
             const funcionario = document.getElementById('funcionarioRelatorio').value;
             const params = funcionario ? `?funcionario_id=${funcionario}` : '';
-            window.open(`relatorio_funcionario.php${params}`, '_blank');
+            window.open(`gerar_pdf_funcionario.php${params}`, '_blank');
         }
 
         function gerarRelatorioEstoque() {

@@ -1,4 +1,4 @@
-<?php
+    <?php
 require_once '../config/conexao.php';
 session_start();
 
@@ -21,7 +21,7 @@ $conn = connect_local_mysqli('gebert');
 
 try {
     // Validar campos obrigatórios
-    $campos_obrigatorios = ['nome', 'categoria'];
+    $campos_obrigatorios = ['id', 'nome', 'categoria_id', 'fabricante', 'status'];
     foreach ($campos_obrigatorios as $campo) {
         if (empty($_POST[$campo])) {
             throw new Exception("Campo '$campo' é obrigatório");
@@ -29,35 +29,39 @@ try {
     }
     
     // Escapar dados de entrada
+    $id = intval($_POST['id']);
     $nome = mysqli_real_escape_string($conn, $_POST['nome']);
-    $descricao = mysqli_real_escape_string($conn, $_POST['descricao'] ?? '');
-    $categoria_id = intval($_POST['categoria']);
-    $fabricante = mysqli_real_escape_string($conn, $_POST['fabricante'] ?? '');
+    $categoria_id = intval($_POST['categoria_id']);
+    $fabricante = mysqli_real_escape_string($conn, $_POST['fabricante']);
     $tamanho = mysqli_real_escape_string($conn, $_POST['tamanho'] ?? '');
-    $observacoes = mysqli_real_escape_string($conn, $_POST['observacoes'] ?? '');
-    $usuario_cadastro = intval($_SESSION['user_id']);
+    $status = mysqli_real_escape_string($conn, $_POST['status']);
+    $descricao = mysqli_real_escape_string($conn, $_POST['descricao'] ?? '');
     
-    // Inserir EPI (versão simplificada)
-    $sql = "INSERT INTO EPI_EQUIPAMENTOS (
-                epi_nome, epi_descricao, epi_categoria, epi_fabricante, 
-                epi_tamanho, epi_observacoes, epi_status, epi_usuario_cadastro,
-                epi_estoque_atual, epi_estoque_minimo
-            ) VALUES (
-                '$nome', '$descricao', $categoria_id, '$fabricante',
-                '$tamanho', '$observacoes', 'ativo', $usuario_cadastro,
-                1, 1
-            )";
+    // Verificar se o EPI existe
+    $sql_check = "SELECT epi_id FROM EPI_EQUIPAMENTOS WHERE epi_id = $id";
+    $result_check = mysqli_query($conn, $sql_check);
     
-    if (!mysqli_query($conn, $sql)) {
-        throw new Exception('Erro ao cadastrar EPI: ' . mysqli_error($conn));
+    if (mysqli_num_rows($result_check) === 0) {
+        throw new Exception('EPI não encontrado');
     }
     
-    $epi_id = mysqli_insert_id($conn);
+    // Atualizar EPI
+    $sql = "UPDATE EPI_EQUIPAMENTOS SET 
+                epi_nome = '$nome',
+                epi_categoria = $categoria_id,
+                epi_fabricante = '$fabricante',
+                epi_tamanho = '$tamanho',
+                epi_status = '$status',
+                epi_descricao = '$descricao'
+            WHERE epi_id = $id";
+    
+    if (!mysqli_query($conn, $sql)) {
+        throw new Exception('Erro ao atualizar EPI: ' . mysqli_error($conn));
+    }
     
     $response = [
         'status' => 'success',
-        'message' => 'EPI cadastrado com sucesso!',
-        'id' => $epi_id
+        'message' => 'EPI atualizado com sucesso!'
     ];
     
 } catch (Exception $e) {
