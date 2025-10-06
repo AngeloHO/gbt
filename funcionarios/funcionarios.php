@@ -159,14 +159,16 @@ $user = $_SESSION['user'];
             padding: 25px;
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             border-radius: 10px;
             border: 2px solid #e9ecef;
             padding: 12px 15px;
             transition: all 0.3s ease;
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: #667eea;
             box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
             transform: translateY(-1px);
@@ -234,6 +236,7 @@ $user = $_SESSION['user'];
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -269,8 +272,13 @@ $user = $_SESSION['user'];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="sidebar-link active" href="funcionarios/funcionarios.php">
+                            <a class="sidebar-link active" href="funcionarios.php">
                                 <i class="bi bi-people"></i> Funcionários
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="sidebar-link " href="../avaliacoes/avaliacoes.php">
+                                <i class="bi bi-star-fill"></i> Avaliações
                             </a>
                         </li>
                         <li class="nav-item">
@@ -289,7 +297,7 @@ $user = $_SESSION['user'];
                             </a>
                         </li>
                         <li class="nav-item mt-5">
-                            <a class="sidebar-link" href="logout.php">
+                            <a class="sidebar-link" href="../logout.php">
                                 <i class="bi bi-box-arrow-right"></i> Sair
                             </a>
                         </li>
@@ -339,7 +347,7 @@ $user = $_SESSION['user'];
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-3 col-lg-6">
                         <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(68, 160, 141, 0.1) 100%); border-left: 5px solid #44a08d !important;">
                             <div class="card-body d-flex align-items-center">
@@ -355,7 +363,7 @@ $user = $_SESSION['user'];
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-3 col-lg-6">
                         <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 133, 27, 0.1) 100%); border-left: 5px solid #fd7e14 !important;">
                             <div class="card-body d-flex align-items-center">
@@ -371,7 +379,7 @@ $user = $_SESSION['user'];
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-3 col-lg-6">
                         <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, rgba(137, 247, 254, 0.1) 0%, rgba(102, 166, 255, 0.1) 100%); border-left: 5px solid #66a6ff !important;">
                             <div class="card-body d-flex align-items-center">
@@ -981,12 +989,12 @@ $user = $_SESSION['user'];
         document.addEventListener('DOMContentLoaded', function() {
             // Aplicar conversão automática para maiúsculas em campos de texto específicos
             const textInputs = document.querySelectorAll('input[type="text"]:not([id="cpf"]):not([id="cep"]):not([id="telefone"]):not([id="telefoneEmergencia"]):not([id="dataAdmissao"]):not([id="dataNascimento"]):not([id="email"])');
-            
+
             textInputs.forEach(input => {
                 // Adicionar classes para maiúsculo
                 input.classList.add('text-uppercase-input');
                 input.style.textTransform = 'uppercase';
-                
+
                 // Adicionar evento de input para conversão
                 input.addEventListener('input', function() {
                     this.value = this.value.toUpperCase();
@@ -1005,7 +1013,7 @@ $user = $_SESSION['user'];
                 btn.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-2px)';
                 });
-                
+
                 btn.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0)';
                 });
@@ -1018,7 +1026,7 @@ $user = $_SESSION['user'];
                     this.parentElement.style.transform = 'scale(1.02)';
                     this.parentElement.style.transition = 'all 0.3s ease';
                 });
-                
+
                 control.addEventListener('blur', function() {
                     this.parentElement.style.transform = 'scale(1)';
                 });
@@ -1126,12 +1134,12 @@ $user = $_SESSION['user'];
                         const total = funcionarios.length;
                         const ativos = funcionarios.filter(f => f.status === 'ativo').length;
                         const inativos = funcionarios.filter(f => f.status === 'inativo').length;
-                        
+
                         // Calcular admissões deste mês
                         const hoje = new Date();
                         const mesAtual = hoje.getMonth();
                         const anoAtual = hoje.getFullYear();
-                        
+
                         const admissoesEMes = funcionarios.filter(f => {
                             if (f.data_admissao) {
                                 const dataAdmissao = new Date(f.data_admissao);
@@ -1144,15 +1152,15 @@ $user = $_SESSION['user'];
                         setTimeout(() => {
                             animateCounter(document.getElementById('totalFuncionarios'), total);
                         }, 100);
-                        
+
                         setTimeout(() => {
                             animateCounter(document.getElementById('funcionariosAtivos'), ativos);
                         }, 200);
-                        
+
                         setTimeout(() => {
                             animateCounter(document.getElementById('funcionariosInativos'), inativos);
                         }, 300);
-                        
+
                         setTimeout(() => {
                             animateCounter(document.getElementById('admissoesEMes'), admissoesEMes);
                         }, 400);

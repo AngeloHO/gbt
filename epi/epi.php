@@ -182,14 +182,16 @@ $user = $_SESSION['user'];
             padding: 25px;
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             border-radius: 10px;
             border: 2px solid #e9ecef;
             padding: 12px 15px;
             transition: all 0.3s ease;
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: #667eea;
             box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
             transform: translateY(-1px);
@@ -241,7 +243,8 @@ $user = $_SESSION['user'];
             transition: all 0.3s ease;
         }
 
-        .sidebar-link:hover, .sidebar-link.active {
+        .sidebar-link:hover,
+        .sidebar-link.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             transform: translateX(10px);
         }
@@ -265,6 +268,7 @@ $user = $_SESSION['user'];
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -307,7 +311,12 @@ $user = $_SESSION['user'];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="sidebar-link active" href="#">
+                            <a class="sidebar-link " href="../avaliacoes/avaliacoes.php">
+                                <i class="bi bi-star-fill"></i> Avaliações
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="sidebar-link active" href="/epi/epi.php">
                                 <i class="bi bi-building"></i> EPI
                             </a>
                         </li>
@@ -322,7 +331,7 @@ $user = $_SESSION['user'];
                             </a>
                         </li>
                         <li class="nav-item mt-5">
-                            <a class="sidebar-link" href="logout.php">
+                            <a class="sidebar-link" href="../logout.php">
                                 <i class="bi bi-box-arrow-right"></i> Sair
                             </a>
                         </li>
@@ -352,7 +361,9 @@ $user = $_SESSION['user'];
                             <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser" style="border-radius: 15px; border: none;">
                                 <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Perfil</a></li>
                                 <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Configurações</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item text-danger" href="../logout.php"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
                             </ul>
                         </div>
@@ -462,7 +473,7 @@ $user = $_SESSION['user'];
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover" id="tabelaEquipamentos">
                                         <thead class="table-dark">
@@ -497,7 +508,7 @@ $user = $_SESSION['user'];
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover" id="tabelaEntregas">
                                         <thead class="table-dark">
@@ -586,12 +597,12 @@ $user = $_SESSION['user'];
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="epiDescricao" class="form-label">Descrição</label>
                             <textarea class="form-control" id="epiDescricao" name="descricao" rows="3" placeholder="Descrição detalhada do equipamento"></textarea>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="epiFabricante" class="form-label">Fabricante</label>
@@ -602,7 +613,7 @@ $user = $_SESSION['user'];
                                 <input type="text" class="form-control" id="epiTamanho" name="tamanho" placeholder="P, M, G, XG, Único">
                             </div>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="epiObservacoes" class="form-label">Observações</label>
                             <textarea class="form-control" id="epiObservacoes" name="observacoes" rows="2" placeholder="Informações adicionais sobre o EPI"></textarea>
@@ -641,7 +652,7 @@ $user = $_SESSION['user'];
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="entregaDataEntrega" class="form-label">Data da Entrega *</label>
@@ -652,17 +663,17 @@ $user = $_SESSION['user'];
                                 <input type="date" class="form-control" id="entregaDataPrevista" name="data_prevista">
                             </div>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="entregaMotivo" class="form-label">Motivo da Entrega</label>
                             <textarea class="form-control" id="entregaMotivo" name="motivo" rows="2" placeholder="Ex: Novo funcionário, reposição, etc."></textarea>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="entregaObservacoes" class="form-label">Observações</label>
                             <textarea class="form-control" id="entregaObservacoes" name="observacoes" rows="2" placeholder="Informações adicionais sobre a entrega"></textarea>
                         </div>
-                        
+
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="entregaAssinatura" name="assinatura" value="1">
                             <label class="form-check-label" for="entregaAssinatura">
@@ -924,10 +935,10 @@ $user = $_SESSION['user'];
             carregarFuncionarios();
             carregarEquipamentos();
             carregarEntregas();
-            
+
             // Definir data de hoje como padrão
             document.getElementById('entregaDataEntrega').value = new Date().toISOString().split('T')[0];
-            
+
             // Carregar funcionários no select de relatórios
             carregarFuncionariosRelatorio();
 
@@ -949,7 +960,7 @@ $user = $_SESSION['user'];
                         document.getElementById('totalEpis').innerHTML = `<span class="counter">${data.data.total_epis || 0}</span>`;
                         document.getElementById('entregasMes').innerHTML = `<span class="counter">${data.data.entregas_mes || 0}</span>`;
                         document.getElementById('episAtivos').innerHTML = `<span class="counter">${data.data.epis_ativos || 0}</span>`;
-                        
+
                         // Animar os números
                         animateCounters();
                     }
@@ -994,10 +1005,10 @@ $user = $_SESSION['user'];
                     if (data.status === 'success') {
                         const selectCategoria = document.getElementById('epiCategoria');
                         const filtroCategoria = document.getElementById('filtroCategoria');
-                        
+
                         selectCategoria.innerHTML = '<option value="">Selecione uma categoria</option>';
                         filtroCategoria.innerHTML = '<option value="">Todas as categorias</option>';
-                        
+
                         data.data.forEach(categoria => {
                             selectCategoria.innerHTML += `<option value="${categoria.id}">${categoria.nome}</option>`;
                             filtroCategoria.innerHTML += `<option value="${categoria.nome}">${categoria.nome}</option>`;
@@ -1018,7 +1029,7 @@ $user = $_SESSION['user'];
                     if (data.status === 'success') {
                         const selectFuncionario = document.getElementById('entregaFuncionario');
                         selectFuncionario.innerHTML = '<option value="">Selecione um funcionário</option>';
-                        
+
                         data.funcionarios.forEach(funcionario => {
                             if (funcionario.status === 'ativo') {
                                 selectFuncionario.innerHTML += `<option value="${funcionario.id}">${funcionario.nome}</option>`;
@@ -1037,15 +1048,15 @@ $user = $_SESSION['user'];
                     if (data.status === 'success') {
                         const tbody = document.querySelector('#tabelaEquipamentos tbody');
                         const selectEpi = document.getElementById('entregaEpi');
-                        
+
                         tbody.innerHTML = '';
                         selectEpi.innerHTML = '<option value="">Selecione um EPI</option>';
-                        
+
                         data.data.forEach(epi => {
-                            const statusBadge = epi.status === 'ativo' ? 
-                                '<span class="badge bg-success">Ativo</span>' : 
+                            const statusBadge = epi.status === 'ativo' ?
+                                '<span class="badge bg-success">Ativo</span>' :
                                 '<span class="badge bg-danger">Inativo</span>';
-                            
+
                             tbody.innerHTML += `
                                 <tr>
                                     <td>${epi.id}</td>
@@ -1063,7 +1074,7 @@ $user = $_SESSION['user'];
                                     </td>
                                 </tr>
                             `;
-                            
+
                             // Adicionar ao select de entregas apenas EPIs ativos
                             if (epi.status === 'ativo') {
                                 selectEpi.innerHTML += `<option value="${epi.id}">${epi.nome}</option>`;
@@ -1082,10 +1093,10 @@ $user = $_SESSION['user'];
                     if (data.status === 'success') {
                         const tbody = document.querySelector('#tabelaEntregas tbody');
                         tbody.innerHTML = '';
-                        
+
                         data.data.forEach(entrega => {
                             let statusBadge;
-                            switch(entrega.status) {
+                            switch (entrega.status) {
                                 case 'entregue':
                                     statusBadge = '<span class="badge bg-primary">Entregue</span>';
                                     break;
@@ -1101,7 +1112,7 @@ $user = $_SESSION['user'];
                                 default:
                                     statusBadge = '<span class="badge bg-secondary">' + entrega.status + '</span>';
                             }
-                            
+
                             tbody.innerHTML += `
                                 <tr>
                                     <td>${entrega.id}</td>
@@ -1130,86 +1141,86 @@ $user = $_SESSION['user'];
         // Função para cadastrar EPI
         document.getElementById('formCadastroEpi').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const formData = new FormData(this);
-            
+
             fetch('cadastrar_epi.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    bootstrap.Modal.getInstance(document.getElementById('cadastroEpiModal')).hide();
-                    showNotification('success', data.message);
-                    this.reset();
-                    carregarEquipamentos();
-                    carregarDashboard();
-                } else {
-                    showNotification('error', data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                showNotification('error', 'Erro ao cadastrar EPI');
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        bootstrap.Modal.getInstance(document.getElementById('cadastroEpiModal')).hide();
+                        showNotification('success', data.message);
+                        this.reset();
+                        carregarEquipamentos();
+                        carregarDashboard();
+                    } else {
+                        showNotification('error', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    showNotification('error', 'Erro ao cadastrar EPI');
+                });
         });
 
         // Função para registrar entrega
         document.getElementById('formEntregaEpi').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const formData = new FormData(this);
-            
+
             fetch('registrar_entrega.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    bootstrap.Modal.getInstance(document.getElementById('entregaEpiModal')).hide();
-                    showNotification('success', data.message);
-                    this.reset();
-                    document.getElementById('entregaDataEntrega').value = new Date().toISOString().split('T')[0];
-                    carregarEntregas();
-                    carregarDashboard();
-                } else {
-                    showNotification('error', data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                showNotification('error', 'Erro ao registrar entrega');
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        bootstrap.Modal.getInstance(document.getElementById('entregaEpiModal')).hide();
+                        showNotification('success', data.message);
+                        this.reset();
+                        document.getElementById('entregaDataEntrega').value = new Date().toISOString().split('T')[0];
+                        carregarEntregas();
+                        carregarDashboard();
+                    } else {
+                        showNotification('error', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    showNotification('error', 'Erro ao registrar entrega');
+                });
         });
 
         // Handler para o formulário de edição de EPI
         document.getElementById('formEditarEpi').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const formData = new FormData(this);
-            
+
             fetch('atualizar_epi.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    bootstrap.Modal.getInstance(document.getElementById('editarEpiModal')).hide();
-                    showNotification('success', data.message);
-                    this.reset();
-                    carregarEquipamentos();
-                    carregarDashboard();
-                } else {
-                    showNotification('error', data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                showNotification('error', 'Erro ao atualizar EPI');
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        bootstrap.Modal.getInstance(document.getElementById('editarEpiModal')).hide();
+                        showNotification('success', data.message);
+                        this.reset();
+                        carregarEquipamentos();
+                        carregarDashboard();
+                    } else {
+                        showNotification('error', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    showNotification('error', 'Erro ao atualizar EPI');
+                });
         });
 
         // Função para mostrar notificações
@@ -1224,9 +1235,9 @@ $user = $_SESSION['user'];
                 ${message}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             `;
-            
+
             document.body.appendChild(alertDiv);
-            
+
             setTimeout(() => {
                 if (alertDiv.parentNode) {
                     alertDiv.parentNode.removeChild(alertDiv);
@@ -1241,19 +1252,19 @@ $user = $_SESSION['user'];
                 .then(data => {
                     if (data.status === 'success' && data.data.length > 0) {
                         const epi = data.data[0];
-                        
+
                         // Preencher os campos do modal
                         document.getElementById('visualizar-nome').textContent = epi.nome || 'Não informado';
                         document.getElementById('visualizar-categoria').textContent = epi.categoria || 'Não informado';
                         document.getElementById('visualizar-fabricante').textContent = epi.fabricante || 'Não informado';
                         document.getElementById('visualizar-tamanho').textContent = epi.tamanho || 'Não informado';
                         document.getElementById('visualizar-descricao').textContent = epi.descricao || 'Nenhuma descrição disponível';
-                        
+
                         // Configurar badge de status
                         const statusBadge = document.getElementById('status-badge');
                         const status = epi.status || 'INDEFINIDO';
                         statusBadge.textContent = status;
-                        
+
                         // Aplicar classes do badge baseado no status
                         statusBadge.className = 'badge fs-6';
                         if (status === 'ATIVO') {
@@ -1263,10 +1274,10 @@ $user = $_SESSION['user'];
                         } else {
                             statusBadge.classList.add('bg-secondary');
                         }
-                        
+
                         // Armazenar ID para possível edição
                         document.getElementById('visualizarEpiModal').setAttribute('data-epi-id', id);
-                        
+
                         // Exibir o modal
                         new bootstrap.Modal(document.getElementById('visualizarEpiModal')).show();
                     } else {
@@ -1300,7 +1311,7 @@ $user = $_SESSION['user'];
                 .then(data => {
                     if (data.status === 'success' && data.data.length > 0) {
                         const epi = data.data[0];
-                        
+
                         // Preencher os campos do formulário
                         document.getElementById('editar-id').value = epi.id;
                         document.getElementById('editar-nome').value = epi.nome || '';
@@ -1308,10 +1319,10 @@ $user = $_SESSION['user'];
                         document.getElementById('editar-tamanho').value = epi.tamanho || '';
                         document.getElementById('editar-status').value = epi.status || 'ATIVO';
                         document.getElementById('editar-descricao').value = epi.descricao || '';
-                        
+
                         // Carregar categorias e selecionar a atual
                         carregarCategoriasEdicao(epi.categoria_id);
-                        
+
                         // Exibir o modal
                         new bootstrap.Modal(document.getElementById('editarEpiModal')).show();
                     } else {
@@ -1340,20 +1351,20 @@ $user = $_SESSION['user'];
                             console.error('Elemento editar-categoria não encontrado');
                             return;
                         }
-                        
+
                         select.innerHTML = '<option value="">Selecione uma categoria</option>';
-                        
+
                         if (data.data && data.data.length > 0) {
                             data.data.forEach(categoria => {
                                 const option = document.createElement('option');
                                 option.value = categoria.id;
                                 option.textContent = categoria.nome;
-                                
+
                                 // Selecionar a categoria atual se fornecida
                                 if (categoriaAtual && categoria.id == categoriaAtual) {
                                     option.selected = true;
                                 }
-                                
+
                                 select.appendChild(option);
                             });
                             console.log('Categorias carregadas com sucesso');
@@ -1377,24 +1388,24 @@ $user = $_SESSION['user'];
                     console.log('Dados da entrega:', data);
                     if (data.status === 'success' && data.data.length > 0) {
                         const entrega = data.data[0];
-                        
+
                         // Preencher os campos do modal
                         document.getElementById('entrega-funcionario').textContent = entrega.funcionario_nome || 'Não informado';
                         document.getElementById('entrega-epi').textContent = entrega.epi_nome || 'Não informado';
-                        
+
                         // Formatar data da entrega
                         const dataEntrega = entrega.data_entrega ? new Date(entrega.data_entrega).toLocaleDateString('pt-BR') : 'Não informado';
                         document.getElementById('entrega-data').textContent = dataEntrega;
-                        
+
                         // Formatar previsão de devolução
                         const dataPrevisao = entrega.data_prevista ? new Date(entrega.data_prevista).toLocaleDateString('pt-BR') : 'Não informado';
                         document.getElementById('entrega-previsao').textContent = dataPrevisao;
-                        
+
                         // Configurar badge de status
                         const statusBadge = document.getElementById('entrega-status-badge');
                         const status = entrega.status || 'INDEFINIDO';
                         statusBadge.textContent = status;
-                        
+
                         // Aplicar classes do badge baseado no status
                         statusBadge.className = 'badge fs-6';
                         if (status === 'ENTREGUE' || status === 'ATIVO') {
@@ -1406,15 +1417,15 @@ $user = $_SESSION['user'];
                         } else {
                             statusBadge.classList.add('bg-secondary');
                         }
-                        
+
                         // Configurar assinatura
                         const assinatura = entrega.assinatura == '1' ? 'Sim' : 'Não';
                         document.getElementById('entrega-assinatura').textContent = assinatura;
-                        
+
                         // Preencher campos de texto
                         document.getElementById('entrega-motivo').textContent = entrega.motivo || 'Nenhum motivo informado';
                         document.getElementById('entrega-observacoes').textContent = entrega.observacoes || 'Nenhuma observação';
-                        
+
                         // Exibir o modal
                         new bootstrap.Modal(document.getElementById('visualizarEntregaModal')).show();
                     } else {
@@ -1430,39 +1441,41 @@ $user = $_SESSION['user'];
         function marcarDevolucao(id) {
             if (confirm('Confirma a devolução deste EPI?')) {
                 fetch('marcar_devolucao.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ entrega_id: id })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        showNotification('success', data.message);
-                        carregarEntregas();
-                        carregarEquipamentos();
-                        carregarDashboard();
-                    } else {
-                        showNotification('error', data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    showNotification('error', 'Erro ao marcar devolução');
-                });
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            entrega_id: id
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            showNotification('success', data.message);
+                            carregarEntregas();
+                            carregarEquipamentos();
+                            carregarDashboard();
+                        } else {
+                            showNotification('error', data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        showNotification('error', 'Erro ao marcar devolução');
+                    });
             }
         }
 
         function gerarRelatorioEntregas() {
             const dataInicial = document.getElementById('dataInicialEntregas').value;
             const dataFinal = document.getElementById('dataFinalEntregas').value;
-            
+
             if (!dataInicial || !dataFinal) {
                 showNotification('error', 'Informe as datas inicial e final');
                 return;
             }
-            
+
             // Abrir o gerador de PDF diretamente
             window.open(`gerar_pdf_entregas.php?data_inicial=${dataInicial}&data_final=${dataFinal}`, '_blank');
         }
@@ -1475,7 +1488,7 @@ $user = $_SESSION['user'];
                     if (data.status === 'success') {
                         const selectFuncionario = document.getElementById('funcionarioRelatorio');
                         selectFuncionario.innerHTML = '<option value="">Todos os funcionários</option>';
-                        
+
                         data.funcionarios.forEach(funcionario => {
                             selectFuncionario.innerHTML += `<option value="${funcionario.id}">${funcionario.nome}</option>`;
                         });

@@ -478,3 +478,13 @@ Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64;
 POST: {"nome":"TESTE ","cpf":"000.000.000-00","rg":"0000000000","dataNascimento":"2990-12-01","telefone":"(00) 00000-0000","email":"teste@teste.com","genero":"outro","cep":"00000-000","endereco":"AVENIDA BRASIL","numero":"1180","complemento":"CASA","bairro":"CENTRO","cidade":"MEDIANEIRA","estado":"PR","funcao":"porteiro","departamento":"operacional","dataAdmissao":"2025-10-02","status":"ativo","turno":"escala12x36","salario":"900,00","observacoes":"","id":"2"}
 Resposta atualizar: {"status":"success","message":"Dados do funcion\u00e1rio atualizados com sucesso!","id":2}
 
+2025-10-03 22:05:14 - Acesso ao alterar_status_funcionario.php
+Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:144.0) Gecko\/20100101 Firefox\/144.0","Accept":"*\/*","Accept-Language":"pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3","Accept-Encoding":"gzip, deflate, br, zstd","Referer":"http:\/\/localhost\/gbt\/funcionarios\/funcionarios.php","X-Requested-With":"XMLHttpRequest","Content-Type":"multipart\/form-data; boundary=----geckoformboundary1ed757a9f5e87338bfd8926d401f05b3","Content-Length":"279","Origin":"http:\/\/localhost","Connection":"keep-alive","Cookie":"PHPSESSID=pg6veqpopdrfiojqragphr3hvk","Sec-Fetch-Dest":"empty","Sec-Fetch-Mode":"cors","Sec-Fetch-Site":"same-origin","Priority":"u=0"}
+POST: {"id":"3","status":"inativo"}
+Resposta alterar status: {"status":"success","message":"Funcion\u00e1rio inativado com sucesso!","id":3,"novo_status":"inativo","status_classe":"danger","status_texto":"Inativo"}
+
+2025-10-03 22:05:26 - Acesso ao alterar_status_funcionario.php
+Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:144.0) Gecko\/20100101 Firefox\/144.0","Accept":"*\/*","Accept-Language":"pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3","Accept-Encoding":"gzip, deflate, br, zstd","Referer":"http:\/\/localhost\/gbt\/funcionarios\/funcionarios.php","X-Requested-With":"XMLHttpRequest","Content-Type":"multipart\/form-data; boundary=----geckoformboundary7e816eb0f0218d3327296906bd54da7e","Content-Length":"277","Origin":"http:\/\/localhost","Connection":"keep-alive","Cookie":"PHPSESSID=pg6veqpopdrfiojqragphr3hvk","Sec-Fetch-Dest":"empty","Sec-Fetch-Mode":"cors","Sec-Fetch-Site":"same-origin","Priority":"u=0"}
+POST: {"id":"3","status":"ativo"}
+Resposta alterar status: {"status":"success","message":"Funcion\u00e1rio ativado com sucesso!","id":3,"novo_status":"ativo","status_classe":"success","status_texto":"Ativo"}
+
