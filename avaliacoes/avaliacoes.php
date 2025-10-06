@@ -385,6 +385,88 @@ $user = $_SESSION['user'];
         </div>
     </div>
 
+    <!-- Modal de Histórico de Avaliações -->
+    <div class="modal fade" id="modalHistorico" tabindex="-1" aria-labelledby="modalHistoricoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalHistoricoLabel">
+                        <i class="bi bi-clock-history"></i> Histórico de Avaliações
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div id="loadingHistorico" class="text-center py-4 d-none">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <p class="mt-2">Carregando histórico de avaliações...</p>
+                    </div>
+
+                    <!-- Informações do Funcionário -->
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card bg-light">
+                                <div class="card-body py-2">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong>Funcionário:</strong> <span id="funcionarioNomeHistorico">-</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>Função:</strong> <span id="funcionarioFuncaoHistorico">-</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>Total de Avaliações:</strong> <span id="totalAvaliacoesHistorico">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Abas de Navegação -->
+                    <ul class="nav nav-tabs" id="historicoTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="atual-tab" data-bs-toggle="tab" data-bs-target="#avaliacaoAtual" type="button" role="tab">
+                                <i class="bi bi-star-fill"></i> Avaliação Atual
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="historico-tab" data-bs-toggle="tab" data-bs-target="#historicoCompleto" type="button" role="tab">
+                                <i class="bi bi-clock-history"></i> Histórico Completo
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="historicoTabContent">
+                        <!-- Aba de Avaliação Atual -->
+                        <div class="tab-pane fade show active" id="avaliacaoAtual" role="tabpanel">
+                            <div class="mt-3" id="avaliacaoAtualContent">
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle"></i> Nenhuma avaliação encontrada para este funcionário.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Aba de Histórico Completo -->
+                        <div class="tab-pane fade" id="historicoCompleto" role="tabpanel">
+                            <div class="mt-3" id="historicoCompletoContent">
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle"></i> Nenhum histórico de avaliações encontrado.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -420,9 +502,14 @@ $user = $_SESSION['user'];
                                     <td>${funcionario.funcao}</td>
                                     <td>${funcionario.telefone}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-sm" onclick="editarFuncionario(${funcionario.id}, '${funcionario.nome}')">
-                                            <i class="bi bi-pencil"></i> Editar
-                                        </button>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="editarFuncionario(${funcionario.id}, '${funcionario.nome}')" title="Avaliar Funcionário">
+                                                <i class="bi bi-pencil"></i> Avaliar
+                                            </button>
+                                            <button type="button" class="btn btn-info btn-sm" onclick="verHistorico(${funcionario.id}, '${funcionario.nome}')" title="Ver Histórico de Avaliações">
+                                                <i class="bi bi-clock-history"></i> Histórico
+                                            </button>
+                                        </div>
                                     </td>
                                 `;
                                 tbody.appendChild(row);
@@ -644,6 +731,203 @@ $user = $_SESSION['user'];
                     btnSalvar.disabled = false;
                     btnSalvar.innerHTML = textoOriginal;
                 });
+        }
+        
+        // Função para abrir modal de histórico
+        function verHistorico(id, nome) {
+            // Atualizar título do modal
+            document.getElementById('modalHistoricoLabel').innerHTML = `
+                <i class="bi bi-clock-history"></i> Histórico de Avaliações: ${nome}
+            `;
+            
+            // Mostrar loading
+            const loading = document.getElementById('loadingHistorico');
+            loading.classList.remove('d-none');
+            
+            // Limpar conteúdo anterior
+            document.getElementById('avaliacaoAtualContent').innerHTML = '';
+            document.getElementById('historicoCompletoContent').innerHTML = '';
+            
+            // Buscar dados do histórico
+            fetch(`buscar_avaliacoes.php?funcionario_id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Preencher informações do funcionário
+                        document.getElementById('funcionarioNomeHistorico').textContent = data.data.funcionario.nome;
+                        document.getElementById('funcionarioFuncaoHistorico').textContent = data.data.funcionario.funcao;
+                        document.getElementById('totalAvaliacoesHistorico').textContent = data.data.total_avaliacoes;
+                        
+                        // Exibir avaliação atual
+                        exibirAvaliacaoAtual(data.data.avaliacao_atual);
+                        
+                        // Exibir histórico
+                        exibirHistoricoCompleto(data.data.historico);
+                        
+                    } else {
+                        // Erro
+                        document.getElementById('avaliacaoAtualContent').innerHTML = `
+                            <div class="alert alert-danger">
+                                <i class="bi bi-exclamation-triangle"></i> ${data.message}
+                            </div>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    document.getElementById('avaliacaoAtualContent').innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle"></i> Erro ao carregar histórico
+                        </div>
+                    `;
+                })
+                .finally(() => {
+                    // Esconder loading
+                    loading.classList.add('d-none');
+                });
+            
+            // Abrir modal
+            const modal = new bootstrap.Modal(document.getElementById('modalHistorico'));
+            modal.show();
+        }
+        
+        // Função para exibir avaliação atual
+        function exibirAvaliacaoAtual(avaliacao) {
+            const container = document.getElementById('avaliacaoAtualContent');
+            
+            if (!avaliacao) {
+                container.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> Este funcionário ainda não possui avaliações.
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = criarCardAvaliacao(avaliacao, true);
+        }
+        
+        // Função para exibir histórico completo
+        function exibirHistoricoCompleto(historico) {
+            const container = document.getElementById('historicoCompletoContent');
+            
+            if (!historico || historico.length === 0) {
+                container.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> Não há histórico de avaliações anteriores.
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            historico.forEach((avaliacao, index) => {
+                html += criarCardAvaliacao(avaliacao, false, index + 2); // Começa do 2º lugar
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Função para criar card de avaliação
+        function criarCardAvaliacao(avaliacao, isAtual = false, posicao = 1) {
+            const badge = isAtual ? 'success' : 'secondary';
+            const titulo = isAtual ? 'Avaliação Atual' : `${posicao}ª Avaliação`;
+            
+            // Cor da classificação
+            let corClassificacao = 'text-muted';
+            switch(avaliacao.classificacao) {
+                case 'Excelente': corClassificacao = 'text-success'; break;
+                case 'Satisfatório': corClassificacao = 'text-primary'; break;
+                case 'Regular': corClassificacao = 'text-warning'; break;
+                case 'Insatisfatório': corClassificacao = 'text-danger'; break;
+            }
+            
+            return `
+                <div class="card mb-3">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="badge bg-${badge}">${titulo}</span>
+                            <strong class="ms-2">${avaliacao.data_feedback}</strong>
+                        </div>
+                        <div class="text-end">
+                            <div class="h5 mb-0 ${corClassificacao}">${avaliacao.media_geral}/5.0</div>
+                            <small class="${corClassificacao}">${avaliacao.classificacao}</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <small class="text-muted">Avaliado por:</small><br>
+                                <strong>${avaliacao.avaliado_por}</strong>
+                            </div>
+                            <div class="col-md-3">
+                                <small class="text-muted">Cargo na época:</small><br>
+                                <strong>${avaliacao.cargo}</strong>
+                            </div>
+                            <div class="col-md-3">
+                                <small class="text-muted">Critérios avaliados:</small><br>
+                                <strong>${avaliacao.criterios_avaliados}/5</strong>
+                            </div>
+                        </div>
+                        
+                        <!-- Avaliações de Desempenho -->
+                        <h6 class="mb-2"><i class="bi bi-star"></i> Avaliações de Desempenho</h6>
+                        <div class="row mb-3">
+                            ${criarColunaAvaliacao('Qualidade do trabalho', avaliacao.avaliacoes.qualidade_trabalho)}
+                            ${criarColunaAvaliacao('Produtividade', avaliacao.avaliacoes.produtividade)}
+                            ${criarColunaAvaliacao('Colaboração', avaliacao.avaliacoes.colaboracao)}
+                            ${criarColunaAvaliacao('Comunicação', avaliacao.avaliacoes.comunicacao)}
+                            ${criarColunaAvaliacao('Comprometimento', avaliacao.avaliacoes.comprometimento)}
+                        </div>
+                        
+                        <!-- Feedback Qualitativo -->
+                        <h6 class="mb-2"><i class="bi bi-chat-text"></i> Feedback Qualitativo</h6>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>Pontos fortes:</strong>
+                                <p class="small">${avaliacao.feedback.pontos_fortes || 'Não informado'}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Pontos de melhoria:</strong>
+                                <p class="small">${avaliacao.feedback.pontos_melhoria || 'Não informado'}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Sugestões para evolução:</strong>
+                                <p class="small">${avaliacao.feedback.sugestao_evolucao || 'Não informado'}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="text-muted text-end">
+                            <small>Registrado em: ${avaliacao.data_criacao}</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Função auxiliar para criar coluna de avaliação
+        function criarColunaAvaliacao(titulo, valor) {
+            if (!valor) {
+                return `
+                    <div class="col-md-2 mb-2">
+                        <small class="text-muted">${titulo}:</small><br>
+                        <span class="text-muted">N/A</span>
+                    </div>
+                `;
+            }
+            
+            let cor = 'text-muted';
+            if (valor >= 4) cor = 'text-success';
+            else if (valor >= 3) cor = 'text-primary';
+            else if (valor >= 2) cor = 'text-warning';
+            else cor = 'text-danger';
+            
+            return `
+                <div class="col-md-2 mb-2">
+                    <small class="text-muted">${titulo}:</small><br>
+                    <span class="h6 ${cor}">${valor}/5</span>
+                </div>
+            `;
         }
 
         // Carregar automaticamente ao abrir a página
