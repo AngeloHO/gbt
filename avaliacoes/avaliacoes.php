@@ -34,8 +34,7 @@ $user = $_SESSION['user'];
     <style>
         .sidebar {
             min-height: 100vh;
-            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-            border-radius: 0 20px 20px 0;
+            background-color: #212529;
         }
 
         .sidebar-link {
@@ -44,17 +43,13 @@ $user = $_SESSION['user'];
             text-decoration: none;
             display: block;
             border-left: 3px solid transparent;
-            border-radius: 10px;
-            margin: 5px 10px;
-            transition: all 0.3s ease;
         }
 
         .sidebar-link:hover,
         .sidebar-link.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #2c3237;
             color: white;
-            border-left-color: #667eea;
-            transform: translateX(10px);
+            border-left-color: #0d6efd;
         }
 
         .sidebar-link i {
@@ -63,14 +58,20 @@ $user = $_SESSION['user'];
             margin-right: 5px;
         }
 
+        .content {
+            padding: 20px;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
         .logo-text {
             font-size: 18px;
             font-weight: 700;
             letter-spacing: 2px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #fff;
         }
 
         .logo-subtitle {
@@ -79,6 +80,47 @@ $user = $_SESSION['user'];
             color: #adb5bd;
         }
 
+        .border-left-primary {
+            border-left: 0.25rem solid #007bff !important;
+        }
+
+        .border-left-success {
+            border-left: 0.25rem solid #28a745 !important;
+        }
+
+        .border-left-warning {
+            border-left: 0.25rem solid #ffc107 !important;
+        }
+
+        .border-left-info {
+            border-left: 0.25rem solid #17a2b8 !important;
+        }
+
+        .text-xs {
+            font-size: 0.7rem;
+        }
+
+        .fa-2x {
+            font-size: 2em;
+        }
+
+        .text-gray-300 {
+            color: #dddfeb !important;
+        }
+
+        .text-gray-800 {
+            color: #5a5c69 !important;
+        }
+
+        .estoque-baixo {
+            background-color: #f8d7da !important;
+        }
+
+        .estoque-ok {
+            background-color: #d4edda !important;
+        }
+
+        /* Melhorias visuais elegantes */
         .card {
             border: none;
             border-radius: 15px;
@@ -91,6 +133,38 @@ $user = $_SESSION['user'];
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
+        .btn {
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            border: none;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            border: none;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
+            border: none;
+        }
+
         .table {
             border-radius: 15px;
             overflow: hidden;
@@ -99,6 +173,122 @@ $user = $_SESSION['user'];
 
         .table-dark {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            border-radius: 20px 20px 0 0;
+            border-bottom: none;
+            padding: 25px;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .nav-tabs .nav-link {
+            border-radius: 15px 15px 0 0;
+            border: none;
+            margin-right: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .badge {
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .border-left-primary {
+            border-left: 5px solid #667eea !important;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        .border-left-success {
+            border-left: 5px solid #44a08d !important;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(68, 160, 141, 0.1) 100%);
+        }
+
+        .border-left-info {
+            border-left: 5px solid #66a6ff !important;
+            background: linear-gradient(135deg, rgba(137, 247, 254, 0.1) 0%, rgba(102, 166, 255, 0.1) 100%);
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            border-radius: 0 20px 20px 0;
+        }
+
+        .sidebar-link {
+            border-radius: 10px;
+            margin: 5px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: translateX(10px);
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .alert {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animações suaves */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Efeito glass morphism */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
     </style>
 </head>
@@ -732,22 +922,22 @@ $user = $_SESSION['user'];
                     btnSalvar.innerHTML = textoOriginal;
                 });
         }
-        
+
         // Função para abrir modal de histórico
         function verHistorico(id, nome) {
             // Atualizar título do modal
             document.getElementById('modalHistoricoLabel').innerHTML = `
                 <i class="bi bi-clock-history"></i> Histórico de Avaliações: ${nome}
             `;
-            
+
             // Mostrar loading
             const loading = document.getElementById('loadingHistorico');
             loading.classList.remove('d-none');
-            
+
             // Limpar conteúdo anterior
             document.getElementById('avaliacaoAtualContent').innerHTML = '';
             document.getElementById('historicoCompletoContent').innerHTML = '';
-            
+
             // Buscar dados do histórico
             fetch(`buscar_avaliacoes.php?funcionario_id=${id}`)
                 .then(response => response.json())
@@ -757,13 +947,13 @@ $user = $_SESSION['user'];
                         document.getElementById('funcionarioNomeHistorico').textContent = data.data.funcionario.nome;
                         document.getElementById('funcionarioFuncaoHistorico').textContent = data.data.funcionario.funcao;
                         document.getElementById('totalAvaliacoesHistorico').textContent = data.data.total_avaliacoes;
-                        
+
                         // Exibir avaliação atual
                         exibirAvaliacaoAtual(data.data.avaliacao_atual);
-                        
+
                         // Exibir histórico
                         exibirHistoricoCompleto(data.data.historico);
-                        
+
                     } else {
                         // Erro
                         document.getElementById('avaliacaoAtualContent').innerHTML = `
@@ -785,16 +975,16 @@ $user = $_SESSION['user'];
                     // Esconder loading
                     loading.classList.add('d-none');
                 });
-            
+
             // Abrir modal
             const modal = new bootstrap.Modal(document.getElementById('modalHistorico'));
             modal.show();
         }
-        
+
         // Função para exibir avaliação atual
         function exibirAvaliacaoAtual(avaliacao) {
             const container = document.getElementById('avaliacaoAtualContent');
-            
+
             if (!avaliacao) {
                 container.innerHTML = `
                     <div class="alert alert-info">
@@ -803,14 +993,14 @@ $user = $_SESSION['user'];
                 `;
                 return;
             }
-            
+
             container.innerHTML = criarCardAvaliacao(avaliacao, true);
         }
-        
+
         // Função para exibir histórico completo
         function exibirHistoricoCompleto(historico) {
             const container = document.getElementById('historicoCompletoContent');
-            
+
             if (!historico || historico.length === 0) {
                 container.innerHTML = `
                     <div class="alert alert-info">
@@ -819,29 +1009,37 @@ $user = $_SESSION['user'];
                 `;
                 return;
             }
-            
+
             let html = '';
             historico.forEach((avaliacao, index) => {
                 html += criarCardAvaliacao(avaliacao, false, index + 2); // Começa do 2º lugar
             });
-            
+
             container.innerHTML = html;
         }
-        
+
         // Função para criar card de avaliação
         function criarCardAvaliacao(avaliacao, isAtual = false, posicao = 1) {
             const badge = isAtual ? 'success' : 'secondary';
             const titulo = isAtual ? 'Avaliação Atual' : `${posicao}ª Avaliação`;
-            
+
             // Cor da classificação
             let corClassificacao = 'text-muted';
-            switch(avaliacao.classificacao) {
-                case 'Excelente': corClassificacao = 'text-success'; break;
-                case 'Satisfatório': corClassificacao = 'text-primary'; break;
-                case 'Regular': corClassificacao = 'text-warning'; break;
-                case 'Insatisfatório': corClassificacao = 'text-danger'; break;
+            switch (avaliacao.classificacao) {
+                case 'Excelente':
+                    corClassificacao = 'text-success';
+                    break;
+                case 'Satisfatório':
+                    corClassificacao = 'text-primary';
+                    break;
+                case 'Regular':
+                    corClassificacao = 'text-warning';
+                    break;
+                case 'Insatisfatório':
+                    corClassificacao = 'text-danger';
+                    break;
             }
-            
+
             return `
                 <div class="card mb-3">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -904,7 +1102,7 @@ $user = $_SESSION['user'];
                 </div>
             `;
         }
-        
+
         // Função auxiliar para criar coluna de avaliação
         function criarColunaAvaliacao(titulo, valor) {
             if (!valor) {
@@ -915,13 +1113,13 @@ $user = $_SESSION['user'];
                     </div>
                 `;
             }
-            
+
             let cor = 'text-muted';
             if (valor >= 4) cor = 'text-success';
             else if (valor >= 3) cor = 'text-primary';
             else if (valor >= 2) cor = 'text-warning';
             else cor = 'text-danger';
-            
+
             return `
                 <div class="col-md-2 mb-2">
                     <small class="text-muted">${titulo}:</small><br>
@@ -938,374 +1136,4 @@ $user = $_SESSION['user'];
 </body>
 
 </html>
-
-// Dados do usuário logado
-$user = $_SESSION['user'];
-?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Sistema Gebert</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-    <style>
-        .sidebar {
-            min-height: 100vh;
-            background-color: #212529;
-        }
-
-        .sidebar-link {
-            padding: 10px 15px;
-            color: #adb5bd;
-            text-decoration: none;
-            display: block;
-            border-left: 3px solid transparent;
-        }
-
-        .sidebar-link:hover,
-        .sidebar-link.active {
-            background-color: #2c3237;
-            color: white;
-            border-left-color: #0d6efd;
-        }
-
-        .sidebar-link i {
-            width: 24px;
-            text-align: center;
-            margin-right: 5px;
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .logo-text {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #fff;
-        }
-
-        .logo-subtitle {
-            font-size: 10px;
-            letter-spacing: 1px;
-            color: #adb5bd;
-        }
-
-        .border-left-primary {
-            border-left: 0.25rem solid #007bff !important;
-        }
-
-        .border-left-success {
-            border-left: 0.25rem solid #28a745 !important;
-        }
-
-        .border-left-warning {
-            border-left: 0.25rem solid #ffc107 !important;
-        }
-
-        .border-left-info {
-            border-left: 0.25rem solid #17a2b8 !important;
-        }
-
-        .text-xs {
-            font-size: 0.7rem;
-        }
-
-        .fa-2x {
-            font-size: 2em;
-        }
-
-        .text-gray-300 {
-            color: #dddfeb !important;
-        }
-
-        .text-gray-800 {
-            color: #5a5c69 !important;
-        }
-
-        .estoque-baixo {
-            background-color: #f8d7da !important;
-        }
-
-        .estoque-ok {
-            background-color: #d4edda !important;
-        }
-
-        /* Melhorias visuais elegantes */
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn {
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            padding: 10px 20px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
-            border: none;
-        }
-
-        .btn-info {
-            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
-            border: none;
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
-            border: none;
-        }
-
-        .table {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-dark {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .modal-content {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-
-        .modal-header {
-            border-radius: 20px 20px 0 0;
-            border-bottom: none;
-            padding: 25px;
-        }
-
-        .form-control,
-        .form-select {
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
-            padding: 12px 15px;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-            transform: translateY(-1px);
-        }
-
-        .nav-tabs .nav-link {
-            border-radius: 15px 15px 0 0;
-            border: none;
-            margin-right: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .nav-tabs .nav-link.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .badge {
-            border-radius: 20px;
-            padding: 8px 15px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .border-left-primary {
-            border-left: 5px solid #667eea !important;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-        }
-
-        .border-left-success {
-            border-left: 5px solid #44a08d !important;
-            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(68, 160, 141, 0.1) 100%);
-        }
-
-        .border-left-info {
-            border-left: 5px solid #66a6ff !important;
-            background: linear-gradient(135deg, rgba(137, 247, 254, 0.1) 0%, rgba(102, 166, 255, 0.1) 100%);
-        }
-
-        .sidebar {
-            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-            border-radius: 0 20px 20px 0;
-        }
-
-        .sidebar-link {
-            border-radius: 10px;
-            margin: 5px 10px;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-link:hover,
-        .sidebar-link.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transform: translateX(10px);
-        }
-
-        .logo-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .alert {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Animações suaves */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card {
-            animation: fadeInUp 0.6s ease;
-        }
-
-        /* Efeito glass morphism */
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="text-center my-4">
-                    <div class="logo-text">GEBERT</div>
-                    <div class="logo-subtitle">SEGURANÇA PATRIMONIAL</div>
-                </div>
-
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="sidebar-link" href="../dashboard.php">
-                                <i class="bi bi-speedometer2"></i> Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="sidebar-link" href="../funcionarios/funcionarios.php">
-                                <i class="bi bi-people"></i> Funcionários
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="sidebar-link" href="../epi/epi.php">
-                                <i class="bi bi-building"></i> EPI
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="sidebar-link active" href="#">
-                                <i class="bi bi-building"></i> Avaliações
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="sidebar-link" href="#">
-                                <i class="bi bi-clipboard-check"></i> Relatórios
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="sidebar-link" href="#">
-                                <i class="bi bi-gear"></i> Configurações
-                            </a>
-                        </li>
-                        <li class="nav-item mt-5">
-                            <a class="sidebar-link" href="logout.php">
-                                <i class="bi bi-box-arrow-right"></i> Sair
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">
-                        <i class="bi bi-shield-check me-2"></i>Gestão de Avaliações
-                    </h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-
-                    </div>
-                </div>
-        </div>
-
-        <!-- Cards de resumo -->
-        <div class="row mb-4">
-            <div class="col-xl-4 col-md-6 mb-4">
-
-            </div>
-        </div>
-
-        <div class="col-xl-4 col-md-6 mb-4">
-
-        </div>
-
-        <div class="col-xl-4 col-md-6 mb-4">
-
-        </div>
-    </div>
-    </div>
-
-    <!-- Abas de navegação -->
-
-    </div>
-    </main>
-    </div>
-    </div>
-
-
-</body>
-
-</html>
+        
