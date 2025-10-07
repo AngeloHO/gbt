@@ -488,3 +488,8 @@ Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64;
 POST: {"id":"3","status":"ativo"}
 Resposta alterar status: {"status":"success","message":"Funcion\u00e1rio ativado com sucesso!","id":3,"novo_status":"ativo","status_classe":"success","status_texto":"Ativo"}
 
+2025-10-07 13:48:47 - Acesso ao alterar_status_funcionario.php
+Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko\/20100101 Firefox\/143.0","Accept":"*\/*","Accept-Language":"pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3","Accept-Encoding":"gzip, deflate, br, zstd","Referer":"http:\/\/localhost\/gebert\/funcionarios\/funcionarios.php","X-Requested-With":"XMLHttpRequest","Content-Type":"multipart\/form-data; boundary=----geckoformboundary1bf3c946d5a2367295e27dc6267aedfb","Content-Length":"279","Origin":"http:\/\/localhost","Connection":"keep-alive","Cookie":"PHPSESSID=qvkhi939pfh09naljgle934d5n","Sec-Fetch-Dest":"empty","Sec-Fetch-Mode":"cors","Sec-Fetch-Site":"same-origin","Priority":"u=0"}
+POST: {"id":"3","status":"inativo"}
+Resposta alterar status: {"status":"success","message":"Funcion\u00e1rio inativado com sucesso!","id":3,"novo_status":"inativo","status_classe":"danger","status_texto":"Inativo"}
+
