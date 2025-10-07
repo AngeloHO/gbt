@@ -316,6 +316,11 @@ $user = $_SESSION['user'];
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="sidebar-link " href="../aso/aso.php">
+                                <i class="bi bi-heart-pulse"></i> ASO
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="sidebar-link active" href="/epi/epi.php">
                                 <i class="bi bi-building"></i> EPI
                             </a>
