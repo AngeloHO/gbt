@@ -48,7 +48,7 @@ try {
                 CASE 
                     WHEN a.ASO_DATA_VALIDADE < CURDATE() THEN 'VENCIDO'
                     WHEN DATEDIFF(a.ASO_DATA_VALIDADE, CURDATE()) <= 30 THEN 'VENCE_30_DIAS'
-                    WHEN DATEDIFF(a.ASO_DATA_VALIDADE, CURDATE()) <= 60 THEN 'VENCE_60_DIAS'
+                    WHEN DATEDIFF(a.ASO_DATA_VALIDADE, CURDATE()) BETWEEN 31 AND 60 THEN 'VENCE_60_DIAS'
                     ELSE 'VIGENTE'
                 END as status_vencimento,
                 DATEDIFF(a.ASO_DATA_VALIDADE, CURDATE()) as dias_para_vencimento

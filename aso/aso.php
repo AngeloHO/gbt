@@ -991,7 +991,7 @@ $user = $_SESSION['user'];
                             <td>${formatarData(aso.data_exame)}</td>
                             <td>${formatarData(aso.data_validade)}</td>
                             <td><span class="badge ${resultadoClass}">${formatarResultado(aso.resultado)}</span></td>
-                            <td><span class="badge ${statusClass}">${formatarStatusVencimento(aso.status_vencimento)}</span></td>
+                            <td><span class="badge ${statusClass}">${formatarStatusVencimentoComDias(aso.status_vencimento, aso.dias_para_vencimento)}</span></td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-sm btn-outline-primary" onclick="visualizarASO(${aso.aso_id})" title="Visualizar">
@@ -1212,10 +1212,17 @@ $user = $_SESSION['user'];
             const statusTexto = {
                 'VIGENTE': 'Vigente',
                 'VENCE_30_DIAS': 'Vence em 30 dias',
-                'VENCE_60_DIAS': 'Vence em 60 dias',
+                'VENCE_60_DIAS': 'Vence em 31-60 dias',
                 'VENCIDO': 'Vencido'
             };
             return statusTexto[status] || status;
+        }
+
+        function formatarStatusVencimentoComDias(status, dias) {
+            if (status === 'VENCE_30_DIAS' || status === 'VENCE_60_DIAS') {
+                return `Vence em ${dias} dias`;
+            }
+            return formatarStatusVencimento(status);
         }
 
         function toggleRestricoesContainer() {
@@ -1284,7 +1291,7 @@ $user = $_SESSION['user'];
                         <p><span class="badge ${resultadoClass}">${formatarResultado(aso.resultado)}</span></p>
                         
                         <h6><strong>Status:</strong></h6>
-                        <p><span class="badge ${statusClass}">${formatarStatusVencimento(aso.status_vencimento)}</span></p>
+                        <p><span class="badge ${statusClass}">${formatarStatusVencimentoComDias(aso.status_vencimento, aso.dias_para_vencimento)}</span></p>
                         
                         <h6><strong>Médico Responsável:</strong></h6>
                         <p>${aso.medico_responsavel}${aso.crm_medico ? ' - CRM: ' + aso.crm_medico : ''}</p>
@@ -1392,7 +1399,7 @@ $user = $_SESSION['user'];
                                                 <p><strong>Data do Exame:</strong> ${formatarData(aso.data_exame)}</p>
                                                 <p><strong>Data de Validade:</strong> ${formatarData(aso.data_validade)}</p>
                                                 <p><strong>Resultado:</strong> <span class="badge ${resultadoClass}">${formatarResultado(aso.resultado)}</span></p>
-                                                ${isAtivo ? `<p><strong>Status:</strong> <span class="badge ${statusClass}">${formatarStatusVencimento(aso.status_vencimento)}</span></p>` : ''}
+                                                ${isAtivo ? `<p><strong>Status:</strong> <span class="badge ${statusClass}">${formatarStatusVencimentoComDias(aso.status_vencimento, aso.dias_para_vencimento)}</span></p>` : ''}
                                             </div>
                                             <div class="col-md-6">
                                                 <p><strong>Médico:</strong> ${aso.medico_responsavel}</p>

@@ -45,7 +45,7 @@ $sql_historico = "SELECT
                         WHEN a.ASO_STATUS != 'ATIVO' THEN 'HISTÓRICO'
                         WHEN a.ASO_DATA_VALIDADE < CURDATE() THEN 'VENCIDO'
                         WHEN DATEDIFF(a.ASO_DATA_VALIDADE, CURDATE()) <= 30 THEN 'VENCE EM 30 DIAS'
-                        WHEN DATEDIFF(a.ASO_DATA_VALIDADE, CURDATE()) <= 60 THEN 'VENCE EM 60 DIAS'
+                        WHEN DATEDIFF(a.ASO_DATA_VALIDADE, CURDATE()) BETWEEN 31 AND 60 THEN 'VENCE EM 60 DIAS'
                         ELSE 'VIGENTE'
                     END as status_vencimento
                   FROM FUN_ASO a
