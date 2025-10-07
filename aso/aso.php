@@ -349,9 +349,17 @@ $user = $_SESSION['user'];
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+            }
         }
 
         .timeline-content {
@@ -441,8 +449,8 @@ $user = $_SESSION['user'];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="sidebar-link" href="#">
-                                <i class="bi bi-gear"></i> Configurações
+                            <a class="sidebar-link" href="../desligamento/desligamento.php">
+                                <i class="bi bi-gear"></i> Desligamentos
                             </a>
                         </li>
                         <li class="nav-item mt-5">
@@ -461,7 +469,7 @@ $user = $_SESSION['user'];
                     <div>
                         <h1 class="h2 mb-0"
                             style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                            <i class="bi bi-heart-pulse me-2"></i>Controle de ASO   
+                            <i class="bi bi-heart-pulse me-2"></i>Controle de ASO
                         </h1>
                         <p class="text-muted small mb-0">Gestão de Atestados de Saúde Ocupacional</p>
                     </div>
@@ -630,7 +638,7 @@ $user = $_SESSION['user'];
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <!-- Paginação -->
                         <nav aria-label="Navegação de páginas" class="mt-3">
                             <ul class="pagination justify-content-center" id="paginacao">
@@ -653,7 +661,7 @@ $user = $_SESSION['user'];
                             <form id="formASO" enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <input type="hidden" id="aso_id" name="aso_id">
-                                    
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="funcionario_id" class="form-label">Funcionário *</label>
@@ -722,7 +730,7 @@ $user = $_SESSION['user'];
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label for="exames_realizados" class="form-label">Exames Realizados</label>
-                                            <textarea class="form-control" id="exames_realizados" name="exames_realizados" rows="3" 
+                                            <textarea class="form-control" id="exames_realizados" name="exames_realizados" rows="3"
                                                 placeholder="Ex: Exame clínico, audiometria, exame oftalmológico..."></textarea>
                                         </div>
                                     </div>
@@ -730,7 +738,7 @@ $user = $_SESSION['user'];
                                     <div class="row" id="restricoes_container" style="display: none;">
                                         <div class="col-md-12">
                                             <label for="restricoes" class="form-label">Restrições</label>
-                                            <textarea class="form-control" id="restricoes" name="restricoes" rows="3" 
+                                            <textarea class="form-control" id="restricoes" name="restricoes" rows="3"
                                                 placeholder="Descreva as restrições do funcionário..."></textarea>
                                         </div>
                                     </div>
@@ -785,7 +793,7 @@ $user = $_SESSION['user'];
                                         </button>
                                     </li>
                                 </ul>
-                                
+
                                 <!-- Tab panes -->
                                 <div class="tab-content mt-3" id="asoTabContent">
                                     <!-- Aba Detalhes -->
@@ -794,7 +802,7 @@ $user = $_SESSION['user'];
                                             <!-- Será preenchido via JavaScript -->
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Aba Histórico -->
                                     <div class="tab-pane fade" id="historico-pane" role="tabpanel" aria-labelledby="historico-tab">
                                         <div id="historico-aso">
@@ -826,13 +834,13 @@ $user = $_SESSION['user'];
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <!-- Máscara para inputs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
@@ -847,26 +855,26 @@ $user = $_SESSION['user'];
             carregarEstatisticas();
             carregarFuncionarios();
             carregarListaASO();
-            
+
             // Event listeners
             $('#filtro-status, #filtro-tipo, #busca-funcionario').on('change keyup', function() {
                 carregarListaASO();
             });
-            
+
             $('#resultado').on('change', function() {
                 toggleRestricoesContainer();
             });
-            
+
             $('#formASO').on('submit', function(e) {
                 e.preventDefault();
                 salvarASO();
             });
-            
+
             // Limpar formulário ao fechar modal
             $('#modalCadastrarASO').on('hidden.bs.modal', function() {
                 limparFormulario();
             });
-            
+
             // Limpar modal de visualização ao fechar
             $('#modalVisualizarASO').on('hidden.bs.modal', function() {
                 // Resetar para a primeira aba
@@ -896,7 +904,7 @@ $user = $_SESSION['user'];
                         $('#total-vence30').text(data.vence30);
                         $('#total-vencidos').text(data.vencidos);
                         $('#total-funcionarios').text(data.total_funcionarios);
-                        
+
                         console.log('Cards atualizados com:', {
                             vigentes: data.vigentes,
                             vence30: data.vence30,
@@ -908,7 +916,11 @@ $user = $_SESSION['user'];
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('Erro AJAX nas estatísticas:', {xhr: xhr, status: status, error: error});
+                    console.error('Erro AJAX nas estatísticas:', {
+                        xhr: xhr,
+                        status: status,
+                        error: error
+                    });
                     console.error('Resposta do servidor:', xhr.responseText);
                 }
             });
@@ -938,7 +950,7 @@ $user = $_SESSION['user'];
         // Carregar lista de ASO
         function carregarListaASO(pagina = 1) {
             paginaAtual = pagina;
-            
+
             const filtros = {
                 status: $('#filtro-status').val(),
                 tipo: $('#filtro-tipo').val(),
@@ -965,7 +977,11 @@ $user = $_SESSION['user'];
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('Erro AJAX:', {xhr: xhr, status: status, error: error});
+                    console.error('Erro AJAX:', {
+                        xhr: xhr,
+                        status: status,
+                        error: error
+                    });
                     console.error('Resposta do servidor:', xhr.responseText);
                     $('#tbody-aso').html('<tr><td colspan="8" class="text-center text-danger">Erro ao carregar dados: ' + error + '</td></tr>');
                 }
@@ -975,14 +991,14 @@ $user = $_SESSION['user'];
         // Preencher tabela de ASO
         function preencherTabelaASO(asos) {
             let html = '';
-            
+
             if (asos.length === 0) {
                 html = '<tr><td colspan="8" class="text-center text-muted">Nenhum ASO encontrado</td></tr>';
             } else {
                 asos.forEach(function(aso) {
                     const statusClass = getStatusClass(aso.status_vencimento);
                     const resultadoClass = getResultadoClass(aso.resultado);
-                    
+
                     html += `
                         <tr>
                             <td>${aso.funcionario_nome}</td>
@@ -1009,31 +1025,31 @@ $user = $_SESSION['user'];
                     `;
                 });
             }
-            
+
             $('#tbody-aso').html(html);
         }
 
         // Criar paginação
         function criarPaginacao(paginacao) {
             let html = '';
-            
+
             // Botão anterior
             html += `<li class="page-item ${paginacao.pagina_atual === 1 ? 'disabled' : ''}">
                         <a class="page-link" href="#" onclick="carregarListaASO(${paginacao.pagina_atual - 1})">Anterior</a>
                      </li>`;
-            
+
             // Números das páginas
             for (let i = 1; i <= paginacao.total_paginas; i++) {
                 html += `<li class="page-item ${i === paginacao.pagina_atual ? 'active' : ''}">
                             <a class="page-link" href="#" onclick="carregarListaASO(${i})">${i}</a>
                          </li>`;
             }
-            
+
             // Botão próximo
             html += `<li class="page-item ${paginacao.pagina_atual === paginacao.total_paginas ? 'disabled' : ''}">
                         <a class="page-link" href="#" onclick="carregarListaASO(${paginacao.pagina_atual + 1})">Próximo</a>
                      </li>`;
-            
+
             $('#paginacao').html(html);
         }
 
@@ -1070,7 +1086,9 @@ $user = $_SESSION['user'];
             $.ajax({
                 url: 'buscar_aso.php',
                 type: 'GET',
-                data: {id: id},
+                data: {
+                    id: id
+                },
                 dataType: 'json',
                 success: function(data) {
                     if (data.status === 'success') {
@@ -1101,7 +1119,9 @@ $user = $_SESSION['user'];
             $.ajax({
                 url: 'buscar_historico_aso.php',
                 type: 'GET',
-                data: {funcionario_id: funcionarioId},
+                data: {
+                    funcionario_id: funcionarioId
+                },
                 dataType: 'json',
                 success: function(data) {
                     if (data.status === 'success') {
@@ -1120,11 +1140,13 @@ $user = $_SESSION['user'];
         function editarASO(id) {
             editandoASO = true;
             $('#modalCadastrarASOLabel').html('<i class="bi bi-pencil me-2"></i>Editar ASO');
-            
+
             $.ajax({
                 url: 'buscar_aso.php',
                 type: 'GET',
-                data: {id: id},
+                data: {
+                    id: id
+                },
                 dataType: 'json',
                 success: function(data) {
                     if (data.status === 'success') {
@@ -1156,7 +1178,9 @@ $user = $_SESSION['user'];
                     $.ajax({
                         url: 'excluir_aso.php',
                         type: 'POST',
-                        data: {id: id},
+                        data: {
+                            id: id
+                        },
                         dataType: 'json',
                         success: function(data) {
                             if (data.status === 'success') {
@@ -1257,14 +1281,14 @@ $user = $_SESSION['user'];
             $('#exames_realizados').val(aso.exames_realizados);
             $('#restricoes').val(aso.restricoes);
             $('#observacoes').val(aso.observacoes);
-            
+
             toggleRestricoesContainer();
         }
 
         function preencherDetalhesASO(aso) {
             const statusClass = getStatusClass(aso.status_vencimento);
             const resultadoClass = getResultadoClass(aso.resultado);
-            
+
             let html = `
                 <div class="row">
                     <div class="col-md-6">
@@ -1339,7 +1363,7 @@ $user = $_SESSION['user'];
                 </div>
                 ` : ''}
             `;
-            
+
             $('#detalhes-aso').html(html);
         }
 
@@ -1371,13 +1395,13 @@ $user = $_SESSION['user'];
                 html += '<div class="alert alert-info">Nenhum histórico de ASO encontrado para este funcionário.</div>';
             } else {
                 html += '<div class="timeline">';
-                
+
                 historico.forEach(function(aso, index) {
                     const statusClass = getStatusClass(aso.status_vencimento);
                     const resultadoClass = getResultadoClass(aso.resultado);
                     const isAtivo = aso.status_aso === 'ATIVO';
                     const isFirst = index === 0;
-                    
+
                     html += `
                         <div class="timeline-item ${isFirst ? 'timeline-item-current' : ''}">
                             <div class="timeline-marker ${isAtivo ? 'timeline-marker-active' : 'timeline-marker-inactive'}">
@@ -1451,10 +1475,10 @@ $user = $_SESSION['user'];
                         </div>
                     `;
                 });
-                
+
                 html += '</div>';
             }
-            
+
             $('#historico-aso').html(html);
         }
 
@@ -1469,7 +1493,10 @@ $user = $_SESSION['user'];
         // Função auxiliar para formatar data e hora
         function formatarDataHora(dataHora) {
             const data = new Date(dataHora);
-            return data.toLocaleDateString('pt-BR') + ' às ' + data.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'});
+            return data.toLocaleDateString('pt-BR') + ' às ' + data.toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
         }
 
         function exportarRelatorio() {

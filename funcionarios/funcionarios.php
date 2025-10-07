@@ -297,8 +297,8 @@ $user = $_SESSION['user'];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="sidebar-link" href="#">
-                                <i class="bi bi-gear"></i> Configurações
+                            <a class="sidebar-link" href="../desligamento/desligamento.php">
+                                <i class="bi bi-gear"></i> Desligamentos
                             </a>
                         </li>
                         <li class="nav-item mt-5">

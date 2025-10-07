@@ -330,9 +330,9 @@ $user = $_SESSION['user'];
                                 <i class="bi bi-clipboard-check"></i> Relatórios
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="sidebar-link" href="#">
-                                <i class="bi bi-gear"></i> Configurações
+                         <li class="nav-item">
+                            <a class="sidebar-link" href="../desligamento/desligamento.php">
+                                <i class="bi bi-gear"></i> Desligamentos
                             </a>
                         </li>
                         <li class="nav-item mt-5">
