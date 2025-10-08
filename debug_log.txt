@@ -493,3 +493,13 @@ Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64;
 POST: {"id":"3","status":"inativo"}
 Resposta alterar status: {"status":"success","message":"Funcion\u00e1rio inativado com sucesso!","id":3,"novo_status":"inativo","status_classe":"danger","status_texto":"Inativo"}
 
+2025-10-08 18:38:35 - Acesso ao alterar_status_funcionario.php
+Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:144.0) Gecko\/20100101 Firefox\/144.0","Accept":"*\/*","Accept-Language":"pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3","Accept-Encoding":"gzip, deflate, br, zstd","Referer":"http:\/\/localhost\/gbt\/funcionarios\/funcionarios.php","X-Requested-With":"XMLHttpRequest","Content-Type":"multipart\/form-data; boundary=----geckoformboundary2b9094d2d61719907e9ad526b6c16856","Content-Length":"277","Origin":"http:\/\/localhost","Connection":"keep-alive","Cookie":"PHPSESSID=pg6veqpopdrfiojqragphr3hvk","Sec-Fetch-Dest":"empty","Sec-Fetch-Mode":"cors","Sec-Fetch-Site":"same-origin","Priority":"u=0"}
+POST: {"id":"3","status":"ativo"}
+Resposta alterar status: {"status":"success","message":"Funcion\u00e1rio ativado com sucesso!","id":3,"novo_status":"ativo","status_classe":"success","status_texto":"Ativo"}
+
+2025-10-08 18:38:38 - Acesso ao alterar_status_funcionario.php
+Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:144.0) Gecko\/20100101 Firefox\/144.0","Accept":"*\/*","Accept-Language":"pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3","Accept-Encoding":"gzip, deflate, br, zstd","Referer":"http:\/\/localhost\/gbt\/funcionarios\/funcionarios.php","X-Requested-With":"XMLHttpRequest","Content-Type":"multipart\/form-data; boundary=----geckoformboundarye6775fafc5a84ada55fc93ef6394f4a","Content-Length":"274","Origin":"http:\/\/localhost","Connection":"keep-alive","Cookie":"PHPSESSID=pg6veqpopdrfiojqragphr3hvk","Sec-Fetch-Dest":"empty","Sec-Fetch-Mode":"cors","Sec-Fetch-Site":"same-origin","Priority":"u=0"}
+POST: {"id":"1","status":"ativo"}
+Resposta alterar status: {"status":"success","message":"Funcion\u00e1rio ativado com sucesso!","id":1,"novo_status":"ativo","status_classe":"success","status_texto":"Ativo"}
+
