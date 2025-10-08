@@ -434,7 +434,7 @@ $user = $_SESSION['user'];
                             </div>
                             <div class="col-md-4">
                                 <label for="avaliadoPor" class="form-label"><strong>Avaliado por:</strong></label>
-                                <input type="text" class="form-control form-control-sm" id="avaliadoPor" placeholder="Nome do coordenador">
+                                <input type="text" class="form-control form-control-sm" id="avaliadoPor" placeholder="NOME DO COORDENADOR...">
                             </div>
                         </div>
 
@@ -549,17 +549,17 @@ $user = $_SESSION['user'];
                                             <div class="col-md-4">
                                                 <label for="pontosFortes" class="form-label"><strong>Pontos fortes</strong></label>
                                                 <small class="text-muted d-block mb-1">O que ele faz bem e deve continuar</small>
-                                                <textarea class="form-control" id="pontosFortes" rows="4" placeholder="Descreva os pontos fortes..."></textarea>
+                                                <textarea class="form-control" id="pontosFortes" rows="4" placeholder="DESCREVA OS PONTOS FORTES..."></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="pontosMelhoria" class="form-label"><strong>Pontos de melhoria</strong></label>
                                                 <small class="text-muted d-block mb-1">Aspectos que precisam ser desenvolvidos</small>
-                                                <textarea class="form-control" id="pontosMelhoria" rows="4" placeholder="Pontos a melhorar..."></textarea>
+                                                <textarea class="form-control" id="pontosMelhoria" rows="4" placeholder="PONTOS A MELHORAR..."></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="sugestaoEvolucao" class="form-label"><strong>Sugestões para evolução</strong></label>
                                                 <small class="text-muted d-block mb-1">Orientações práticas</small>
-                                                <textarea class="form-control" id="sugestaoEvolucao" rows="4" placeholder="Sugestões práticas..."></textarea>
+                                                <textarea class="form-control" id="sugestaoEvolucao" rows="4" placeholder="SUGESTÕES PRÁTICAS..."></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1136,7 +1136,33 @@ $user = $_SESSION['user'];
         // Carregar automaticamente ao abrir a página
         document.addEventListener('DOMContentLoaded', function() {
             carregarFuncionarios();
+            inicializarConversaoMaiusculo();
         });
+        
+        // Função para inicializar conversão automática para maiúsculo
+        function inicializarConversaoMaiusculo() {
+            // Aplica conversão automática para inputs de texto e textareas, excluindo select, date, file, etc.
+            document.addEventListener('input', function(event) {
+                const element = event.target;
+                
+                // Aplica apenas em inputs de texto e textareas, excluindo outros tipos
+                if ((element.tagName === 'INPUT' && element.type === 'text') || element.tagName === 'TEXTAREA') {
+                    // Evita aplicar em campos readonly ou disabled
+                    if (element.readOnly || element.disabled) {
+                        return;
+                    }
+                    
+                    const cursorPosition = element.selectionStart;
+                    const value = element.value.toUpperCase();
+                    element.value = value;
+                    
+                    // Restaura a posição do cursor
+                    if (element.setSelectionRange) {
+                        element.setSelectionRange(cursorPosition, cursorPosition);
+                    }
+                }
+            });
+        }
     </script>
 </body>
 

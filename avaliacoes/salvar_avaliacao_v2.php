@@ -108,9 +108,9 @@ try {
     
     // Preparar dados para inserção
     $funcionario_id = (int)$input['funcionario_id'];
-    $avaliado_por = trim($input['avaliado_por']);
+    $avaliado_por = strtoupper(trim($input['avaliado_por']));
     $data_feedback = $input['data_feedback'];
-    $cargo = trim($input['cargo']);
+    $cargo = strtoupper(trim($input['cargo']));
     
     // Avaliações (permitir NULL se não preenchido)
     $qualidade_trabalho = !empty($input['qualidade_trabalho']) ? (int)$input['qualidade_trabalho'] : null;
@@ -119,10 +119,10 @@ try {
     $comunicacao = !empty($input['comunicacao']) ? (int)$input['comunicacao'] : null;
     $comprometimento = !empty($input['comprometimento']) ? (int)$input['comprometimento'] : null;
     
-    // Feedback qualitativo
-    $pontos_fortes = trim($input['pontos_fortes'] ?? '');
-    $pontos_melhoria = trim($input['pontos_melhoria'] ?? '');
-    $sugestao_evolucao = trim($input['sugestao_evolucao'] ?? '');
+    // Feedback qualitativo (converter para maiúsculo)
+    $pontos_fortes = strtoupper(trim($input['pontos_fortes'] ?? ''));
+    $pontos_melhoria = strtoupper(trim($input['pontos_melhoria'] ?? ''));
+    $sugestao_evolucao = strtoupper(trim($input['sugestao_evolucao'] ?? ''));
     
     $created_by = $_SESSION['user_id'];
     

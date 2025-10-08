@@ -705,25 +705,25 @@ $user = $_SESSION['user'];
                                         </div>
                                         <div class="col-md-6">
                                             <label for="numero_documento" class="form-label">Número do Documento</label>
-                                            <input type="text" class="form-control" id="numero_documento" name="numero_documento">
+                                            <input type="text" class="form-control" id="numero_documento" name="numero_documento" placeholder="DIGITE O NÚMERO DO DOCUMENTO...">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="medico_responsavel" class="form-label">Médico Responsável *</label>
-                                            <input type="text" class="form-control" id="medico_responsavel" name="medico_responsavel" required>
+                                            <input type="text" class="form-control" id="medico_responsavel" name="medico_responsavel" placeholder="NOME DO MÉDICO RESPONSÁVEL..." required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="crm_medico" class="form-label">CRM</label>
-                                            <input type="text" class="form-control" id="crm_medico" name="crm_medico">
+                                            <input type="text" class="form-control" id="crm_medico" name="crm_medico" placeholder="NÚMERO DO CRM...">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label for="clinica_exame" class="form-label">Clínica/Local do Exame</label>
-                                            <input type="text" class="form-control" id="clinica_exame" name="clinica_exame">
+                                            <input type="text" class="form-control" id="clinica_exame" name="clinica_exame" placeholder="NOME DA CLÍNICA OU LOCAL DO EXAME...">
                                         </div>
                                     </div>
 
@@ -731,7 +731,7 @@ $user = $_SESSION['user'];
                                         <div class="col-md-12">
                                             <label for="exames_realizados" class="form-label">Exames Realizados</label>
                                             <textarea class="form-control" id="exames_realizados" name="exames_realizados" rows="3"
-                                                placeholder="Ex: Exame clínico, audiometria, exame oftalmológico..."></textarea>
+                                                placeholder="EX: EXAME CLÍNICO, AUDIOMETRIA, EXAME OFTALMOLÓGICO..."></textarea>
                                         </div>
                                     </div>
 
@@ -739,14 +739,14 @@ $user = $_SESSION['user'];
                                         <div class="col-md-12">
                                             <label for="restricoes" class="form-label">Restrições</label>
                                             <textarea class="form-control" id="restricoes" name="restricoes" rows="3"
-                                                placeholder="Descreva as restrições do funcionário..."></textarea>
+                                                placeholder="DESCREVA AS RESTRIÇÕES DO FUNCIONÁRIO..."></textarea>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label for="observacoes" class="form-label">Observações</label>
-                                            <textarea class="form-control" id="observacoes" name="observacoes" rows="3"></textarea>
+                                            <textarea class="form-control" id="observacoes" name="observacoes" rows="3" placeholder="OBSERVAÇÕES ADICIONAIS..."></textarea>
                                         </div>
                                     </div>
 
@@ -855,6 +855,9 @@ $user = $_SESSION['user'];
             carregarEstatisticas();
             carregarFuncionarios();
             carregarListaASO();
+            
+            // Inicializar conversão automática para maiúsculo
+            inicializarConversaoMaiusculo();
 
             // Event listeners
             $('#filtro-status, #filtro-tipo, #busca-funcionario').on('change keyup', function() {
@@ -890,6 +893,31 @@ $user = $_SESSION['user'];
                 `);
             });
         });
+        
+        // Função para inicializar conversão automática para maiúsculo
+        function inicializarConversaoMaiusculo() {
+            // Aplica conversão automática para inputs de texto e textareas, excluindo select, date, file, etc.
+            $(document).on('input keyup', 'input[type="text"], textarea', function() {
+                // Evita aplicar em campos de arquivo, data, número, email, etc.
+                if ($(this).attr('type') === 'file' || 
+                    $(this).attr('type') === 'date' || 
+                    $(this).attr('type') === 'number' ||
+                    $(this).attr('type') === 'email' ||
+                    $(this).is('select')) {
+                    return;
+                }
+                
+                const element = $(this);
+                const cursorPosition = element[0].selectionStart;
+                const value = element.val().toUpperCase();
+                element.val(value);
+                
+                // Restaura a posição do cursor
+                if (element[0].setSelectionRange) {
+                    element[0].setSelectionRange(cursorPosition, cursorPosition);
+                }
+            });
+        }
 
         // Carregar estatísticas do dashboard
         function carregarEstatisticas() {
