@@ -325,11 +325,6 @@ $user = $_SESSION['user'];
                                 <i class="bi bi-building"></i> EPI
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="sidebar-link" href="#">
-                                <i class="bi bi-clipboard-check"></i> Relatórios
-                            </a>
-                        </li>
                          <li class="nav-item">
                             <a class="sidebar-link" href="../desligamento/desligamento.php">
                                 <i class="bi bi-person-dash"></i> Desligamentos

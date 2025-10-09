@@ -503,3 +503,8 @@ Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64;
 POST: {"id":"1","status":"ativo"}
 Resposta alterar status: {"status":"success","message":"Funcion\u00e1rio ativado com sucesso!","id":1,"novo_status":"ativo","status_classe":"success","status_texto":"Ativo"}
 
+2025-10-09 15:21:27 - Acesso ao cadastrar_funcionario.php
+Headers: {"Host":"localhost","User-Agent":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:144.0) Gecko\/20100101 Firefox\/144.0","Accept":"*\/*","Accept-Language":"pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3","Accept-Encoding":"gzip, deflate, br, zstd","Referer":"http:\/\/localhost\/gbt\/funcionarios\/funcionarios.php","X-Requested-With":"XMLHttpRequest","Content-Type":"multipart\/form-data; boundary=----geckoformboundary1b2d1a92277642df75960bb29cc4377d","Content-Length":"2643","Origin":"http:\/\/localhost","Connection":"keep-alive","Cookie":"PHPSESSID=pg6veqpopdrfiojqragphr3hvk","Sec-Fetch-Dest":"empty","Sec-Fetch-Mode":"cors","Sec-Fetch-Site":"same-origin","Priority":"u=0"}
+POST: {"nome":"MIGUEL","cpf":"852.369.741-22","rg":"1234569875","dataNascimento":"2000-10-01","telefone":"(36) 4877-0555","email":"teste@teste.com","genero":"masculino","cep":"98666-777","endereco":"TESTE","numero":"556","complemento":"TESTE","bairro":"TESTE","cidade":"TESTE","estado":"PR","funcao":"vigilante","departamento":"operacional","dataAdmissao":"2025-10-01","status":"ativo","turno":"escala12x36","salario":"964,00","observacoes":"teste","certificacoes":["vigilante"]}
+Resposta: {"status":"success","message":"Funcion\u00e1rio cadastrado com sucesso!","id":6}
+
